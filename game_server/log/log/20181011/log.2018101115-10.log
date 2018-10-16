@@ -1,0 +1,49 @@
+[system][3753][2018-10-11 15:26:07][WARN][main][com.cellsgame.orm.dbimpl.JedisPool:24]redis ip:192.168.10.193  port: 6379 password:
+[][3753][2018-10-11 15:26:07][WARN][main][com.cellsgame.orm.dbimpl.JedisPool:24]redis ip:192.168.10.193  port: 6379 password:
+[system][4772][2018-10-11 15:26:08][WARN][main][com.cellsgame.game.Bootstrap:109]-->http server host : 192.168.10.193, port : 7001
+[][4772][2018-10-11 15:26:08][WARN][main][com.cellsgame.game.Bootstrap:109]-->http server host : 192.168.10.193, port : 7001
+[][4808][2018-10-11 15:26:08][INFO][main][org.eclipse.jetty.util.log:192]Logging initialized @4919ms to org.eclipse.jetty.util.log.Slf4jLog
+[][4808][2018-10-11 15:26:08][INFO][main][org.eclipse.jetty.util.log:192]Logging initialized @4919ms to org.eclipse.jetty.util.log.Slf4jLog
+[][4923][2018-10-11 15:26:08][INFO][main][org.eclipse.jetty.server.Server:372]jetty-9.4.6.v20170531
+[][4923][2018-10-11 15:26:08][INFO][main][org.eclipse.jetty.server.Server:372]jetty-9.4.6.v20170531
+[][4973][2018-10-11 15:26:08][INFO][main][org.eclipse.jetty.server.session:364]DefaultSessionIdManager workerName=node0
+[][4973][2018-10-11 15:26:08][INFO][main][org.eclipse.jetty.server.session:364]DefaultSessionIdManager workerName=node0
+[][4973][2018-10-11 15:26:08][INFO][main][org.eclipse.jetty.server.session:369]No SessionScavenger set, using defaults
+[][4973][2018-10-11 15:26:08][INFO][main][org.eclipse.jetty.server.session:369]No SessionScavenger set, using defaults
+[][4977][2018-10-11 15:26:08][INFO][main][org.eclipse.jetty.server.session:149]Scavenging every 660000ms
+[][4977][2018-10-11 15:26:08][INFO][main][org.eclipse.jetty.server.session:149]Scavenging every 660000ms
+[][5021][2018-10-11 15:26:08][INFO][main][org.eclipse.jetty.server.handler.ContextHandler:788]Started o.e.j.s.ServletContextHandler@6754ef00{/game,null,AVAILABLE}
+[][5021][2018-10-11 15:26:08][INFO][main][org.eclipse.jetty.server.handler.ContextHandler:788]Started o.e.j.s.ServletContextHandler@6754ef00{/game,null,AVAILABLE}
+[][5236][2018-10-11 15:26:08][INFO][main][org.eclipse.jetty.server.AbstractConnector:280]Started ServerConnector@38d5b107{HTTP/1.1,[http/1.1]}{0.0.0.0:7001}
+[][5236][2018-10-11 15:26:08][INFO][main][org.eclipse.jetty.server.AbstractConnector:280]Started ServerConnector@38d5b107{HTTP/1.1,[http/1.1]}{0.0.0.0:7001}
+[][5236][2018-10-11 15:26:08][INFO][main][org.eclipse.jetty.server.Server:444]Started @5347ms
+[][5236][2018-10-11 15:26:08][INFO][main][org.eclipse.jetty.server.Server:444]Started @5347ms
+[system][5236][2018-10-11 15:26:08][WARN][main][com.cellsgame.game.Bootstrap:133]-->http server已启动
+[][5236][2018-10-11 15:26:08][WARN][main][com.cellsgame.game.Bootstrap:133]-->http server已启动
+[system][12192][2018-10-11 15:26:15][WARN][main][com.cellsgame.gateway.message.MessageHandler:26]message processor service not set, message will be processed in the connection io thread. 
+[system][12569][2018-10-11 15:26:16][WARN][pool-game_logic-1-thread-1][com.cellsgame.game.Bootstrap:204]-->dispatch已启动
+[][12569][2018-10-11 15:26:16][WARN][pool-game_logic-1-thread-1][com.cellsgame.game.Bootstrap:204]-->dispatch已启动
+[system][12570][2018-10-11 15:26:16][WARN][pool-game_logic-1-thread-1][com.cellsgame.game.Bootstrap:218]-->quartz已启动
+[][12570][2018-10-11 15:26:16][WARN][pool-game_logic-1-thread-1][com.cellsgame.game.Bootstrap:218]-->quartz已启动
+[system][12857][2018-10-11 15:26:16][WARN][main][io.netty.bootstrap.ServerBootstrap:146]Unknown channel option 'SO_KEEPALIVE' for channel '[id: 0x963eace9]'
+[system][12872][2018-10-11 15:26:16][WARN][main][io.netty.bootstrap.ServerBootstrap:146]Unknown channel option 'TCP_NODELAY' for channel '[id: 0x963eace9]'
+[system][12882][2018-10-11 15:26:16][WARN][main][com.cellsgame.game.Bootstrap:226]-->socket已启动
+[][12882][2018-10-11 15:26:16][WARN][main][com.cellsgame.game.Bootstrap:226]-->socket已启动
+[system][12948][2018-10-11 15:26:16][WARN][main][com.cellsgame.common.util.cmd.console.ReLoad:43]-->AgentLib not load Console CMD [reload] is invalidate
+[][12948][2018-10-11 15:26:16][WARN][main][com.cellsgame.common.util.cmd.console.ReLoad:43]-->AgentLib not load Console CMD [reload] is invalidate
+[system][52585][2018-10-11 15:26:56][WARN][[Game Server] io-worker-thread-3-2][com.cellsgame.game.core.socket.GameMessageHandler:59]gateway server [gw20003] connected
+[system][52585][2018-10-11 15:26:56][WARN][[Game Server] io-worker-thread-3-8][com.cellsgame.game.core.socket.GameMessageHandler:59]gateway server [gw20003] connected
+[system][52585][2018-10-11 15:26:56][WARN][[Game Server] io-worker-thread-3-7][com.cellsgame.game.core.socket.GameMessageHandler:59]gateway server [gw20003] connected
+[system][52585][2018-10-11 15:26:56][WARN][[Game Server] io-worker-thread-3-4][com.cellsgame.game.core.socket.GameMessageHandler:59]gateway server [gw20003] connected
+[system][52585][2018-10-11 15:26:56][WARN][[Game Server] io-worker-thread-3-6][com.cellsgame.game.core.socket.GameMessageHandler:59]gateway server [gw20003] connected
+[system][52585][2018-10-11 15:26:56][WARN][[Game Server] io-worker-thread-3-3][com.cellsgame.game.core.socket.GameMessageHandler:59]gateway server [gw20003] connected
+[system][52585][2018-10-11 15:26:56][WARN][[Game Server] io-worker-thread-3-5][com.cellsgame.game.core.socket.GameMessageHandler:59]gateway server [gw20003] connected
+[system][52608][2018-10-11 15:26:56][WARN][[Game Server] io-worker-thread-3-1][com.cellsgame.game.core.socket.GameMessageHandler:59]gateway server [gw20003] connected
+[system][129046][2018-10-11 15:28:12][WARN][[Game Server] io-worker-thread-3-3][com.cellsgame.game.core.socket.GameMessageHandler:59]gateway server [gw20003] connected
+[system][129050][2018-10-11 15:28:12][WARN][[Game Server] io-worker-thread-3-7][com.cellsgame.game.core.socket.GameMessageHandler:59]gateway server [gw20003] connected
+[system][129056][2018-10-11 15:28:12][WARN][[Game Server] io-worker-thread-3-4][com.cellsgame.game.core.socket.GameMessageHandler:59]gateway server [gw20003] connected
+[system][129060][2018-10-11 15:28:12][WARN][[Game Server] io-worker-thread-3-8][com.cellsgame.game.core.socket.GameMessageHandler:59]gateway server [gw20003] connected
+[system][129061][2018-10-11 15:28:12][WARN][[Game Server] io-worker-thread-3-6][com.cellsgame.game.core.socket.GameMessageHandler:59]gateway server [gw20003] connected
+[system][129063][2018-10-11 15:28:12][WARN][[Game Server] io-worker-thread-3-1][com.cellsgame.game.core.socket.GameMessageHandler:59]gateway server [gw20003] connected
+[system][129066][2018-10-11 15:28:12][WARN][[Game Server] io-worker-thread-3-2][com.cellsgame.game.core.socket.GameMessageHandler:59]gateway server [gw20003] connected
+[system][129067][2018-10-11 15:28:12][WARN][[Game Server] io-worker-thread-3-5][com.cellsgame.game.core.socket.GameMessageHandler:59]gateway server [gw20003] connected

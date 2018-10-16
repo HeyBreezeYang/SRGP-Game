@@ -1,0 +1,1 @@
+"商品ID{id,int}(idx)","购买动作{purchase,json_func}(json,purchase)","商品消耗{cost,json_func}(json,cost)","商店类型(num,type)","购买等级限制{purchaseLv,int}(num,purchaseLv)","任务类型{type,int}(num,type)",

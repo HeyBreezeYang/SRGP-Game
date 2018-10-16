@@ -1,0 +1,6 @@
+"ID{id,int}(idx)","类型{type,int}(num,type)","描述","次数{searchNum,int}(num,cs)","是否免费{free,bool}(num,free)","免费CD，小时单位{freeCd,int}","消耗{costs,json_funcs}(json,costs)",
+70300001,1,金币抽,1,1,1,"[{type:5,param:1,value:-500}]",
+70300002,2,金币十连,10,0,1,"[{type:5,param:2,value:-5000}]",
+70300003,3,钻石单抽,1,1,1,"[{type:5,param:3,value:-500}]",
+70300004,4,钻石十连,10,0,1,"[{type:5,param:4,value:-5000}]",
+70300005,5,VIP抽,1,0,1,"[{type:5,param:5,value:-5000},{type:1,param:56000001,value:-1}]",

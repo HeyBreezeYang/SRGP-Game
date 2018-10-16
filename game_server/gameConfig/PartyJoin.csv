@@ -1,0 +1,5 @@
+"ID{id,int}(idx)","类型{type,int}(num,t)","参加消耗{cost,json_func}(json,c)","参与奖励{prize,json_func}(json,p)","酒会奖励积分{partyIntegralPrize,int}(num,p1)","参与宝箱奖励{boxPrize,int}(num,b)",
+50110001,1,"{type:4,param:80400002,value:-100}","{type:4,param:80400006,value:100}",200,30140001,
+50110002,1,"{type:4,param:80400002,value:-500}","{type:4,param:80400006,value:500}",200,30140002,
+50110003,1,"{type:1,param:30030032,value:-1}","{type:4,param:80400006,value:1000}",200,30140003,
+50120001,2,"{type:1,param:30030033,value:-1}","{type:4,param:80400006,value:0}",-100,0,

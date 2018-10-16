@@ -1,0 +1,6 @@
+[15:28:11] [WARN ][main] - [MessageHandler :26  ] - message processor service not set, message will be processed in the connection io thread. 
+[15:28:12] [WARN ][main] - [ServerBootstrap:146 ] - Unknown channel option 'SO_KEEPALIVE' for channel '[id: 0xc538d080]'
+[15:28:12] [WARN ][main] - [ServerBootstrap:146 ] - Unknown channel option 'TCP_NODELAY' for channel '[id: 0xc538d080]'
+[15:28:12] [ERROR][FileWatchdog] - [Main           :154 ] - logic server configuration was changed, latest size of server = 1
+[15:28:12] [WARN ][FileWatchdog] - [MessageHandler :26  ] - message processor service not set, message will be processed in the connection io thread. 
+[15:28:12] [ERROR][FileWatchdog] - [Connector      :62  ] - connect to a new address[key=kd_tx_gs1001, dest=/192.168.10.193:7002]

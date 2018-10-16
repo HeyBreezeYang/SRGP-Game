@@ -1,0 +1,4 @@
+[][8406860][2018-10-11 20:04:43][DEBUG][Scheduler-795590320][org.eclipse.jetty.server.session:264]Scavenging sessions
+[][8406863][2018-10-11 20:04:43][DEBUG][Scheduler-795590320][org.eclipse.jetty.server.session:1260]org.eclipse.jetty.server.session.SessionHandler1637601612==dftMaxIdleSec=-1 scavenging sessions
+[][8406863][2018-10-11 20:04:43][DEBUG][Scheduler-795590320][org.eclipse.jetty.server.session:1268]Scavenging session ids []
+[][8406863][2018-10-11 20:04:43][DEBUG][Scheduler-795590320][org.eclipse.jetty.server.session:659]SessionDataStore checking expiration on []

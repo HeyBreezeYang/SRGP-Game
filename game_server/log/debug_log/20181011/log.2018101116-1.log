@@ -1,0 +1,20 @@
+[][2645065][2018-10-11 16:10:08][DEBUG][Scheduler-795590320][org.eclipse.jetty.server.session:264]Scavenging sessions
+[][2645065][2018-10-11 16:10:08][DEBUG][Scheduler-795590320][org.eclipse.jetty.server.session:1260]org.eclipse.jetty.server.session.SessionHandler1637601612==dftMaxIdleSec=-1 scavenging sessions
+[][2645065][2018-10-11 16:10:08][DEBUG][Scheduler-795590320][org.eclipse.jetty.server.session:1268]Scavenging session ids []
+[][2645065][2018-10-11 16:10:08][DEBUG][Scheduler-795590320][org.eclipse.jetty.server.session:659]SessionDataStore checking expiration on []
+[][3305083][2018-10-11 16:21:08][DEBUG][Scheduler-795590320][org.eclipse.jetty.server.session:264]Scavenging sessions
+[][3305083][2018-10-11 16:21:08][DEBUG][Scheduler-795590320][org.eclipse.jetty.server.session:1260]org.eclipse.jetty.server.session.SessionHandler1637601612==dftMaxIdleSec=-1 scavenging sessions
+[][3305083][2018-10-11 16:21:08][DEBUG][Scheduler-795590320][org.eclipse.jetty.server.session:1268]Scavenging session ids []
+[][3305083][2018-10-11 16:21:08][DEBUG][Scheduler-795590320][org.eclipse.jetty.server.session:659]SessionDataStore checking expiration on []
+[][3965102][2018-10-11 16:32:08][DEBUG][Scheduler-795590320][org.eclipse.jetty.server.session:264]Scavenging sessions
+[][3965102][2018-10-11 16:32:08][DEBUG][Scheduler-795590320][org.eclipse.jetty.server.session:1260]org.eclipse.jetty.server.session.SessionHandler1637601612==dftMaxIdleSec=-1 scavenging sessions
+[][3965102][2018-10-11 16:32:08][DEBUG][Scheduler-795590320][org.eclipse.jetty.server.session:1268]Scavenging session ids []
+[][3965102][2018-10-11 16:32:08][DEBUG][Scheduler-795590320][org.eclipse.jetty.server.session:659]SessionDataStore checking expiration on []
+[][4625121][2018-10-11 16:43:08][DEBUG][Scheduler-795590320][org.eclipse.jetty.server.session:264]Scavenging sessions
+[][4625122][2018-10-11 16:43:08][DEBUG][Scheduler-795590320][org.eclipse.jetty.server.session:1260]org.eclipse.jetty.server.session.SessionHandler1637601612==dftMaxIdleSec=-1 scavenging sessions
+[][4625122][2018-10-11 16:43:08][DEBUG][Scheduler-795590320][org.eclipse.jetty.server.session:1268]Scavenging session ids []
+[][4625122][2018-10-11 16:43:08][DEBUG][Scheduler-795590320][org.eclipse.jetty.server.session:659]SessionDataStore checking expiration on []
+[][5285141][2018-10-11 16:54:08][DEBUG][Scheduler-795590320][org.eclipse.jetty.server.session:264]Scavenging sessions
+[][5285141][2018-10-11 16:54:08][DEBUG][Scheduler-795590320][org.eclipse.jetty.server.session:1260]org.eclipse.jetty.server.session.SessionHandler1637601612==dftMaxIdleSec=-1 scavenging sessions
+[][5285141][2018-10-11 16:54:08][DEBUG][Scheduler-795590320][org.eclipse.jetty.server.session:1268]Scavenging session ids []
+[][5285141][2018-10-11 16:54:08][DEBUG][Scheduler-795590320][org.eclipse.jetty.server.session:659]SessionDataStore checking expiration on []

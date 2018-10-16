@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Don't forget to set system property
+-DLog4jContextSelector=org.apache.logging.log4j.core.async.AsyncLoggerContextSelector
+     to make all loggers asynchronous. -->
+
+<Configuration status="WARN" shutdownHook="disable">
+    <Appenders>
+        <!-- 定义控制台输出 -->
+        <Console name="Console" target="SYSTEM_OUT" follow="true">
+            <ThresholdFilter level="WARN" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="[%date{HH:mm:ss}] [%-5level][%t] - [%-15logger{0}:%-4L] - %msg%n"/>
+        </Console>
+        <!-- Async Loggers will auto-flush in batches, so switch off immediateFlush. -->
+        <!--每分钟滚动  生产环境不要进行压缩 这里会占用很大的游戏内存空间-->
+        <RollingRandomAccessFile name="FILE" fileName="log/log.log"
+                                 filePattern="log/log/%d{yyyyMMdd}/log.%d{yyyyMMddHH}-%i.log"
+                                 immediateFlush="false" append="true">
+            <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+            <!--topic,key,appName,relative,time,level,thread,logger-->
+            <OneLinePatternLayout includeNewLine="true"
+                                  pattern="[%mdc{key}][%relative][%date{yyyy-MM-dd HH:mm:ss}][%level][%t][%logger:%L]%message">
+            </OneLinePatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <OnStartupTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="500M"/>
+            </Policies>
+            <!--按小时 保存30天-->
+            <DefaultRolloverStrategy max="120"/>
+        </RollingRandomAccessFile>
+
+        <RollingRandomAccessFile name="DEBUG_FILE" fileName="log/debug_log.log"
+                                 filePattern="log/debug_log/%d{yyyyMMdd}/log.%d{yyyyMMddHH}-%i.log"
+                                 immediateFlush="false" append="true">
+            <LevelRangeFilter minLevel="DEBUG" maxLevel="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>
+            <!--topic,key,appName,relative,time,level,thread,logger-->
+            <OneLinePatternLayout includeNewLine="true"
+                                  pattern="[%mdc{key}][%relative][%date{yyyy-MM-dd HH:mm:ss}][%level][%t][%logger:%L]%message">
+            </OneLinePatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <OnStartupTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="500M"/>
+            </Policies>
+            <!--按小时 保存30天-->
+            <DefaultRolloverStrategy max="120"/>
+        </RollingRandomAccessFile>
+        
+        
+        <RollingRandomAccessFile name="ERROR_FILE" fileName="log/error_log.log"
+                                 filePattern="log/error_log/%d{yyyyMMdd}/log.%d{yyyyMMddHH}-%i.log"
+                                 immediateFlush="false" append="true">
+            <LevelRangeFilter minLevel="ERROR" maxLevel="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
+            <!--topic,key,appName,relative,time,level,thread,logger-->
+            <OneLinePatternLayout includeNewLine="true"
+                                  pattern="[%mdc{key}][%relative][%date{yyyy-MM-dd HH:mm:ss}][%level][%t][%logger:%L]%message">
+            </OneLinePatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <OnStartupTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="500M"/>
+            </Policies>
+            <!--按小时 保存30天-->
+            <DefaultRolloverStrategy max="120"/>
+        </RollingRandomAccessFile>
+
+        <RollingRandomAccessFile name="OPLOGFILE" fileName="log/oplog.log"
+                                 filePattern="log/oplog/%d{yyyyMMdd}/oplog.%d{yyyyMMddHH}-%i.log"
+                                 immediateFlush="false" append="true">
+            <!--topic,key,appName,relative,time,level,thread,logger-->
+            <OneLinePatternLayout includeNewLine="true" pattern="%message">
+            </OneLinePatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <OnStartupTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="500M"/>
+            </Policies>
+            <!--按小时 保存30天-->
+            <DefaultRolloverStrategy max="120"/>
+        </RollingRandomAccessFile>
+        
+        <RollingRandomAccessFile name="GAMELOGFILE" fileName="log/game_log.log"
+                                 filePattern="log/game_log/%d{yyyyMMdd}/oplog.%d{yyyyMMddHH}-%i.log"
+                                 immediateFlush="false" append="true">
+            <!--topic,key,appName,relative,time,level,thread,logger-->
+            <OneLinePatternLayout includeNewLine="true" pattern="%date{yyyy-MM-dd}|+|%date{HH}|+|%message">
+            </OneLinePatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <OnStartupTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="500M"/>
+            </Policies>
+            <!--按小时 保存30天-->
+            <DefaultRolloverStrategy max="120"/>
+        </RollingRandomAccessFile>
+        
+        
+        <RollingRandomAccessFile name="FIGHTLOGFILE" fileName="log/fight_log.log"
+                                 filePattern="log/fight_log/%d{yyyyMMdd}/fightlog.%d{yyyyMMddHH}-%i.log"
+                                 immediateFlush="false" append="true">
+            <!--topic,key,appName,relative,time,level,thread,logger-->
+            <OneLinePatternLayout includeNewLine="true" pattern="%message">
+            </OneLinePatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <OnStartupTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="500M"/>
+            </Policies>
+            <!--按小时 保存30天-->
+            <DefaultRolloverStrategy max="120"/>
+        </RollingRandomAccessFile>
+
+
+        <Rewrite name="OutReWrite">
+            <AppenderRef ref="FILE"/>
+            <AppenderRef ref="DEBUG_FILE"/>
+            <AppenderRef ref="ERROR_FILE"/>
+        </Rewrite>
+        <Rewrite name="OPOutReWrite">
+            <AppenderRef ref="OPLOGFILE"/>
+        </Rewrite>
+        <Rewrite name="FightLogRewrite">
+            <AppenderRef ref="FIGHTLOGFILE"/>
+        </Rewrite>
+        
+        <Rewrite name="systemRewrite">
+            <AppenderRef ref="OutReWrite"/>
+            <PropertiesRewritePolicy>
+                <property name="key">system</property>
+            </PropertiesRewritePolicy>
+        </Rewrite>
+
+        <Rewrite name="OPLogRewrite">
+            <AppenderRef ref="socket"/>
+            <PropertiesRewritePolicy>
+                <property name="key">OPLog</property>
+            </PropertiesRewritePolicy>
+        </Rewrite>
+        <Rewrite name="clientOPRewrite">
+            <AppenderRef ref="OutReWrite"/>
+            <PropertiesRewritePolicy>
+                <property name="key">clientOP</property>
+            </PropertiesRewritePolicy>
+        </Rewrite>
+        <Rewrite name="debugRewrite">
+            <AppenderRef ref="OutReWrite"/>
+            <PropertiesRewritePolicy>
+                <property name="key">debug</property>
+            </PropertiesRewritePolicy>
+        </Rewrite>
+        <!-- TODO commented by luojf945 -->
+        <!--<Socket name="socket" host="${bundle:log:socket.host}" port="${bundle:log:socket.port}" protocol="TCP" reconnectDelayMillis="10000">-->
+            <!--<OneLinePatternLayout includeNewLine="true" pattern="%date{yyyy-MM-dd}|+|%date{HH}|+|%message" />-->
+    	<!--</Socket>-->
+    </Appenders>
+
+    <Loggers>
+
+        <!--输出到系统文件-->
+        <logger name="java.sql" level="WARN" additivity="false" includeLocation="true">
+            <appender-ref ref="systemRewrite"/>
+            <appender-ref ref="Console"/>
+
+        </logger>
+        <logger name="io.netty" level="WARN" additivity="false" includeLocation="true">
+            <appender-ref ref="systemRewrite"/>
+            <appender-ref ref="Console"/>
+
+        </logger>
+        <logger name="org.springframework" level="WARN" additivity="false" includeLocation="true">
+            <appender-ref ref="systemRewrite"/>
+        </logger>
+        <logger name="org.quartz" level="WARN" additivity="false" includeLocation="true">
+            <appender-ref ref="systemRewrite"/>
+            <appender-ref ref="Console"/>
+
+        </logger>
+        <logger name="org.apache.activemq" level="WARN" additivity="false" includeLocation="true">
+            <appender-ref ref="systemRewrite"/>
+            <appender-ref ref="Console"/>
+
+        </logger>
+        <logger name="org.apache.logging" level="WARN" additivity="false" includeLocation="true">
+            <appender-ref ref="systemRewrite"/>
+            <appender-ref ref="Console"/>
+        </logger>
+        <logger name="io.netty" level="WARN" additivity="false" includeLocation="true">
+            <appender-ref ref="systemRewrite"/>
+            <appender-ref ref="Console"/>
+        </logger>
+
+        <logger name="OPLog" level="INFO" additivity="false" includeLocation="false">
+            <appender-ref ref="OPLogRewrite"/>
+        </logger>
+        <logger name="fightLog" level="ERROR" additivity="false" includeLocation="false">
+            <appender-ref ref="FightLogRewrite"/>
+        </logger>
+
+        <logger name="akka" level="WARN" additivity="false" includeLocation="true">
+            <appender-ref ref="systemRewrite"/>
+            <appender-ref ref="Console"/>
+        </logger>
+        <logger name="org.apache.http" level="WARN" additivity="false" includeLocation="true">
+            <appender-ref ref="systemRewrite"/>
+            <appender-ref ref="Console"/>
+        </logger>
+
+        <logger name="com.cellsgame" level="WARN" additivity="false" includeLocation="true">
+            <appender-ref ref="systemRewrite"/>
+            <appender-ref ref="Console"/>
+            <appender-ref ref="OutReWrite"/>
+        </logger>
+        <!--网关相关-->
+        <logger name="com.cellsgame.gateway" level="WARN" additivity="false" includeLocation="true">
+            <appender-ref ref="systemRewrite"/>
+            <appender-ref ref="Console"/>
+        </logger>
+        <!--MessageController -->
+        <logger name="com.cellsgame.game.context" level="WARN" additivity="false" includeLocation="true">
+            <appender-ref ref="systemRewrite"/>
+            <appender-ref ref="Console"/>
+        </logger>
+        <!--消息分发-->
+        <logger name="com.cellsgame.game.core.dispatch" level="WARN" additivity="false" includeLocation="true">
+            <appender-ref ref="systemRewrite"/>
+            <appender-ref ref="Console"/>
+        </logger>
+        <!--socket-->
+        <logger name="com.cellsgame.game.core.socket" level="WARN" additivity="false" includeLocation="true">
+            <appender-ref ref="systemRewrite"/>
+            <appender-ref ref="Console"/>
+        </logger>
+
+        <Root level="DEBUG" includeLocation="true">
+            <appender-ref ref="OutReWrite"/>
+            <appender-ref ref="FILE"/>
+        </Root>
+    </Loggers>
+</Configuration>

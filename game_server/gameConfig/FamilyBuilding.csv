@@ -1,0 +1,6 @@
+"配置ID(idx){id,int}","建筑等级{lv,int}(num,lv)","建筑类型{type,int}(num,type)","创建消耗{createCostMny,int}(num,createCostMny)","初始耐久度{initDurability,int}(num,initDurability)","每人每分钟修建提升耐久度{perMenDurability,int}(num,perMenDurability)",
+61000001,1,1001,0,30,5,
+61000002,1,1002,0,30,5,
+61000003,1,1003,0,30,5,
+61000004,1,1004,0,30,5,
+61000005,1,1005,0,30,5,

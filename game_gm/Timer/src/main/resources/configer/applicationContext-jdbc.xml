@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:util="http://www.springframework.org/schema/util"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+  
+    <context:component-scan base-package="com.gmtime.gm.*"/>
+  
+  	<!-- 加载dbconfig.properties文件 -->
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:configer/linkconfig.properties</value>
+			</list>
+		</property>
+		<!-- 解决各个模块自身内部的过个配置文件问题 -->
+		<property name="ignoreUnresolvablePlaceholders" value="true" />  
+	</bean>
+	
+	<!-- rpggm数据库 -->
+	<bean id="localdataSource" class="org.apache.commons.dbcp.BasicDataSource" scope="singleton" destroy-method="close">
+		<!-- 基本连接信息 -->
+		<property name="driverClassName" value="${db.driver}" />
+		<property name="url" value="${db.url}" />
+		<property name="username" value="${db.user}" />
+		<property name="password" value="${db.pass}" />
+		<!-- 连接数配置、可以调整 -->
+		<property name="initialSize" value="2" />
+		<property name="minIdle" value="2" />
+		<property name="maxIdle" value="4" />
+		<property name="maxActive" value="4" />
+		<property name="maxWait" value="10000" />
+		<!-- 事务安全及只读配置，一般情况下无须修改 
+		<property name="defaultAutoCommit" value="true" />
+		<property name="defaultReadOnly" value="false" />-->
+		<!-- 连接有效验证 -->
+		<property name="validationQuery" value="SELECT 1;" />
+		<property name="testOnBorrow" value="true" />
+		<property name="testOnReturn" value="true" />
+		<property name="testWhileIdle" value="true" />
+		<!-- 空闲连接处理 -->
+		<property name="timeBetweenEvictionRunsMillis" value="120000" />
+		<property name="minEvictableIdleTimeMillis" value="300000" />
+		<!-- 活动连接处理 -->
+		<property name="logAbandoned" value="false" />
+		<property name="removeAbandoned" value="true" />
+		<property name="removeAbandonedTimeout" value="120" />
+	</bean>
+
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"> 
+		<!-- name="dataSource" 是唯一的 必须写成这样   ref="localdataSource" 是配置的数据库id--> 
+	    <property name="dataSource" ref="localdataSource"></property>  
+	</bean>
+
+	<!-- 创建事务代理对象 -->
+	<bean id="interceptor" class="org.springframework.transaction.interceptor.TransactionInterceptor">
+		<property name="transactionManager" ref="transactionManager" />
+		<property name="transactionAttributes">
+			<props>
+				<!-- PROPAGATION_REQUIRED指的是支持当前事务，如果当前没有事务，就新建一个事务。这是最常见的选择 -->
+				<prop key="*">PROPAGATION_REQUIRED,-Exception</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<!-- 自动事务代理，所有需要事务的bean的名称在这里定义 -->
+	<bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		<property name="beanNames">
+			<list>
+				<value>*Service*</value>
+				<value>*if</value>
+				<value>*IF</value>
+				<value>*Creator</value>
+			</list>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>interceptor</value>
+			</list>
+		</property>
+	</bean>
+	<!-- 获取jdbcTemplate连接模版 -->
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource"><ref bean="localdataSource" /></property>
+	</bean>
+
+	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		<property name="maxTotal">
+			<value>200</value>
+		</property>
+		<property name="maxIdle">
+			<value>50</value>
+		</property>
+		<property name="minIdle">
+			<value>10</value>
+		</property>
+		<property name="testOnBorrow" value="true"/>
+		<property name="testOnReturn" value="true"/>
+	</bean>
+	<bean id="shardedJedisPool" class="redis.clients.jedis.ShardedJedisPool" scope="singleton">
+		<constructor-arg index="0" ref="jedisPoolConfig"/>
+		<constructor-arg index="1">
+			<list>
+				<bean class="redis.clients.jedis.JedisShardInfo">
+					<constructor-arg name="host" value="${redis.uri}"/>
+				</bean>
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<util:map id="rmi_url">
+		<entry  key="IP" value="${rmi.ip}"/>
+		<entry  key="PORT" value="${rmi.port}"/>
+		<entry  key="NAME" value="${rmi.name}"/>
+	</util:map>
+</beans>

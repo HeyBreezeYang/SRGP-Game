@@ -1,0 +1,5 @@
+[][136735][2018-10-11 15:17:50][ERROR][main][com.cellsgame.common.util.cmd.CMDResolver:98]can not find cmd :[ping] parm:[[ping]]
+[system][143600][2018-10-11 15:17:57][ERROR][main][com.cellsgame.common.util.cmd.CMDResolver:98]can not find cmd :[ping] parm:[[ping, 127.0.0.1]]
+[][143600][2018-10-11 15:17:57][ERROR][main][com.cellsgame.common.util.cmd.CMDResolver:98]can not find cmd :[ping] parm:[[ping, 127.0.0.1]]
+[system][150894][2018-10-11 15:18:05][ERROR][main][com.cellsgame.common.util.cmd.CMDResolver:98]can not find cmd :[cmd] parm:[[cmd]]
+[][150894][2018-10-11 15:18:05][ERROR][main][com.cellsgame.common.util.cmd.CMDResolver:98]can not find cmd :[cmd] parm:[[cmd]]

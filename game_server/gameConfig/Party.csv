@@ -1,0 +1,3 @@
+"ID{id,int}(idx)","宴会名称(str,n)","描述(str,d)","人数上限{playerLimit,int}(num,pl)","创建消耗{createCost,json_funcs}(json,cc)","持续时间{duration,int}(num,t)","文字表描述1","文字表描述2",
+50000001,家宴,,10,"[{type:1,param:30030015,value:-5},{type:1,param:30030016,value:-5},{type:4,param:80400002,value:-100}]",86400,150000001,250000001,
+50000002,官宴,,50,"[{type:1,param:30030017,value:-5},{type:1,param:30030018,value:-5},{type:4,param:80400002,value:-500}]",86400,150000002,250000002,

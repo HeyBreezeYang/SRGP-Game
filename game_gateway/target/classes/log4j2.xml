@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Don't forget to set system property
+-DLog4jContextSelector=org.apache.logging.log4j.core.async.AsyncLoggerContextSelector
+     to make all loggers asynchronous. -->
+
+<Configuration status="WARN" shutdownHook="disable">
+    <Appenders>
+        <!-- 定义控制台输出 -->
+        <Console name="Console" target="SYSTEM_OUT" follow="true">
+            <ThresholdFilter level="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="[%date{HH:mm:ss}] [%-5level][%t] - [%-15logger{0}:%-4L] - %msg%n"/>
+        </Console>
+        <!--每分钟滚动  生产环境不要进行压缩 这里会占用很大的游戏内存空间-->
+        <RollingRandomAccessFile name="FILE" fileName="log/log.log"
+                                 filePattern="log/log/%d{yyyyMMdd}/log.%d{yyyyMMddHH}-%i.log"
+                                 immediateFlush="false" append="true">
+            <ThresholdFilter level="WARN" onMatch="ACCEPT" onMismatch="DENY"/>
+            <!--topic,key,appName,relative,time,level,thread,logger-->
+            <PatternLayout pattern="[%date{HH:mm:ss}] [%-5level][%t] - [%-15logger{0}:%-4L] - %msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <OnStartupTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="500M"/>
+            </Policies>
+            <!--按小时 保存30天-->
+            <DefaultRolloverStrategy max="720"/>
+        </RollingRandomAccessFile>
+
+        <!--每分钟滚动  生产环境不要进行压缩 这里会占用很大的游戏内存空间-->
+        <RollingRandomAccessFile name="HANDLER" fileName="handlerTraffic/hf.log"
+                                 filePattern="handlerTraffic/hf/%d{yyyyMMdd}/hf.%d{yyyyMMddHH}-%i.log"
+                                 immediateFlush="false" append="true">
+            <ThresholdFilter level="WARN" onMatch="ACCEPT" onMismatch="DENY"/>
+            <!--topic,key,appName,relative,time,level,thread,logger-->
+            <PatternLayout pattern="[%date{HH:mm:ss}] [%-5level][%t] - [%-15logger{0}:%-4L] - %msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <OnStartupTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="500M"/>
+            </Policies>
+            <!--按小时 保存30天-->
+            <DefaultRolloverStrategy max="720"/>
+        </RollingRandomAccessFile>
+
+        <Rewrite name="OutReWrite">
+            <AppenderRef ref="FILE"/>
+        </Rewrite>
+    </Appenders>
+
+    <Loggers>
+
+        <!--输出到系统文件-->
+        <logger name="java.sql" level="WARN" additivity="false" includeLocation="true">
+            <appender-ref ref="OutReWrite"/>
+            <appender-ref ref="Console"/>
+
+        </logger>
+        <logger name="io.netty" level="WARN" additivity="false" includeLocation="true">
+            <appender-ref ref="OutReWrite"/>
+            <appender-ref ref="Console"/>
+
+        </logger>
+        <logger name="org.springframework" level="WARN" additivity="false" includeLocation="true">
+            <appender-ref ref="OutReWrite"/>
+        </logger>
+        <logger name="org.quartz" level="WARN" additivity="false" includeLocation="true">
+            <appender-ref ref="OutReWrite"/>
+            <appender-ref ref="Console"/>
+
+        </logger>
+        <logger name="org.apache.activemq" level="WARN" additivity="false" includeLocation="true">
+            <appender-ref ref="OutReWrite"/>
+            <appender-ref ref="Console"/>
+
+        </logger>
+        <logger name="org.apache.logging" level="WARN" additivity="false" includeLocation="true">
+            <appender-ref ref="OutReWrite"/>
+            <appender-ref ref="Console"/>
+        </logger>
+        <logger name="io.netty" level="WARN" additivity="false" includeLocation="true">
+            <appender-ref ref="OutReWrite"/>
+            <appender-ref ref="Console"/>
+        </logger>
+        <logger name="org.apache.http" level="WARN" additivity="false" includeLocation="true">
+            <appender-ref ref="OutReWrite"/>
+            <appender-ref ref="Console"/>
+        </logger>
+        <!--网关相关-->
+        <logger name="com.cellsgame.gateway" level="INFO" additivity="false" includeLocation="true">
+            <appender-ref ref="OutReWrite"/>
+            <appender-ref ref="Console"/>
+        </logger>   <!--网关相关-->
+        <logger name="com.cellsgame.gateway.message.handler" level="WARN" additivity="false" includeLocation="false">
+            <appender-ref ref="HANDLER"/>
+            <appender-ref ref="Console"/>
+        </logger>
+        <Root level="DEBUG" includeLocation="true">
+            <appender-ref ref="Console"/>
+        </Root>
+    </Loggers>
+</Configuration>

@@ -1,0 +1,11 @@
+@startuml
+BatchEventProcessor --> GameHandler: run()
+
+GameHandler -> MessageProcess: onEvent()
+
+MessageProcess -> ILogicDispatcher: exec()
+
+ILogicDispatcher -> PlayerBO: dispatchLogic()
+
+PlayerBO -> PlayerBOImpl: enterGame()
+@enduml

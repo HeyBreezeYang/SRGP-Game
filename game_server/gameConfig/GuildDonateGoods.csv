@@ -1,0 +1,1 @@
+"编号(idx){id,int}","消耗和奖励{costAndPrize,json_funcs}(json,costAndPrize)","捐献的物品ID {donateGoodsID,int}(num,donateGoodsID)",

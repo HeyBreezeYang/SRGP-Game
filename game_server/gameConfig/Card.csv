@@ -1,0 +1,1 @@
+"ID{id,int}(idx)","งน{expiryDate,int}(num,expiryDate)","{dayPrize,json_funcs}(json,dayPrize)"

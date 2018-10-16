@@ -1,0 +1,1 @@
+"ID{id,int}(idx)","{groupId,int}(num,groupId)","{rank,int}(num,rank)","{prizes,json_funcs}(json,prizes)"

@@ -1,0 +1,817 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+     http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
+
+
+    <!-- jedis池配置 -->
+    <bean id="jedisPool1" class="com.cellsgame.orm.dbimpl.JedisPool">
+        <constructor-arg index="0" value="${redis.host}"/>
+        <constructor-arg index="1" value="${redis.port}"/>
+        <constructor-arg index="2" value="${redis.password}"/>
+    </bean>
+
+    <!-- 数据库存储策略配置 -->
+    <bean id="redis_db_strategy" class="com.cellsgame.orm.dbimpl.JedisStrategy">
+        <property name="jedisPool" ref="jedisPool1"/>
+    </bean>
+
+    <!-- 线程管理器配置 -->
+    <bean id="threadManager" class="com.cellsgame.conc.thread.ESManager">
+        <property name="threadPoolSetting">
+            <map>
+                <!-- key 为线程池名, value为线程池持有线程数量, 0为无界线程池,1为单线程池,n为固定n条线程的线程池 -->
+                <entry key="checkIn_data_single_threadpool" value="1"/>
+                <entry key="player_data_single_threadpool" value="1"/>
+                <entry key="depot_data_single_threadpool" value="1"/>
+                <entry key="shop_data_single_threadpool" value="1"/>
+                <entry key="guild_data_single_threadpool" value="1"/>
+                <entry key="guild_member_data_single_threadpool" value="1"/>
+                <entry key="guild_req_data_single_threadpool" value="1"/>
+                <entry key="mail_data_single_threadpool" value="1"/>
+                <entry key="fixed_drop_data_single_threadpool" value="1"/>
+                <entry key="system_record_single_threadpool" value="1"/>
+                <entry key="hero_data_single_threadpool" value="1"/>
+                <entry key="skill_data_single_threadpool" value="1"/>
+
+                <entry key="zip_threadpool" value="3"/>
+                <entry key="friend_DB_Threads" value="1"/>
+                <entry key="rank_DB_Threads" value="1"/>
+                <entry key="activity_single_thread" value="1"/>
+                <entry key="chat_single_thread" value="1"/>
+                <entry key="order_single_thread" value="1"/>
+                <entry key="card_single_thread" value="1"/>
+                <entry key="quest_sigle_thread" value="1"/>
+                <entry key="stats_sigle_thread" value="1"/>
+                <entry key="rank_single_thread" value="1"/>
+                <entry key="store_single_thread" value="1"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="storeItemRecordDAO" class="com.cellsgame.orm.BaseDAO">
+        <!-- 数据库策略 -->
+        <property name="DBStrategy" ref="redis_db_strategy"/>
+        <!-- 线程管理器 -->
+        <property name="threadManager" ref="threadManager"/>
+        <!-- 数据访问线程池名 -->
+        <property name="threadPoolSign" value="store_single_thread"/>
+        <!-- 是否为数字型主键,数字主键支持 Integer,Long,Short三型 -->
+        <property name="isNumberPK" value="true"/>
+        <!-- VO对象Class类型,用于OR映射时构造VO对象 -->
+        <property name="voClass" value="com.cellsgame.game.module.store.vo.StoreItemRecordVO"/>
+        <!-- 存储表名 -->
+        <property name="tableName" value="storeItemRecord_data"/>
+        <!--
+                            关联键(外键)Map
+            key值为VO对象getRelationKeys函数返回的关联键数组的下标,
+            value为数组中该下标元素对应的关联键表名. 支持多个单一关联键
+                            不支持组合关联键
+         -->
+        <property name="relKeyPreName">
+            <map>
+                <entry key="0" value="storeItemRecord_playerId"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="storeDAO" class="com.cellsgame.orm.BaseDAO">
+        <!-- 数据库策略 -->
+        <property name="DBStrategy" ref="redis_db_strategy"/>
+        <!-- 线程管理器 -->
+        <property name="threadManager" ref="threadManager"/>
+        <!-- 数据访问线程池名 -->
+        <property name="threadPoolSign" value="store_single_thread"/>
+        <!-- 是否为数字型主键,数字主键支持 Integer,Long,Short三型 -->
+        <property name="isNumberPK" value="true"/>
+        <!-- VO对象Class类型,用于OR映射时构造VO对象 -->
+        <property name="voClass" value="com.cellsgame.game.module.store.vo.StoreVO"/>
+        <!-- 存储表名 -->
+        <property name="tableName" value="store_data"/>
+        <!--
+                            关联键(外键)Map
+            key值为VO对象getRelationKeys函数返回的关联键数组的下标,
+            value为数组中该下标元素对应的关联键表名. 支持多个单一关联键
+                            不支持组合关联键
+         -->
+        <property name="relKeyPreName">
+            <map>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="cardDAO" class="com.cellsgame.orm.BaseDAO">
+        <!-- 数据库策略 -->
+        <property name="DBStrategy" ref="redis_db_strategy"/>
+        <!-- 线程管理器 -->
+        <property name="threadManager" ref="threadManager"/>
+        <!-- 数据访问线程池名 -->
+        <property name="threadPoolSign" value="card_single_thread"/>
+        <!-- 是否为数字型主键,数字主键支持 Integer,Long,Short三型 -->
+        <property name="isNumberPK" value="true"/>
+        <!-- VO对象Class类型,用于OR映射时构造VO对象 -->
+        <property name="voClass" value="com.cellsgame.game.module.card.vo.CardVO"/>
+        <!-- 存储表名 -->
+        <property name="tableName" value="card_data"/>
+        <!--
+                            关联键(外键)Map
+            key值为VO对象getRelationKeys函数返回的关联键数组的下标,
+            value为数组中该下标元素对应的关联键表名. 支持多个单一关联键
+                            不支持组合关联键
+         -->
+        <property name="relKeyPreName">
+            <map>
+                <entry key="0" value="card_playerId"/>
+            </map>
+        </property>
+    </bean>
+    
+    <bean id="orderDAO" class="com.cellsgame.orm.BaseDAO">
+        <!-- 数据库策略 -->
+        <property name="DBStrategy" ref="redis_db_strategy"/>
+        <!-- 线程管理器 -->
+        <property name="threadManager" ref="threadManager"/>
+        <!-- 数据访问线程池名 -->
+        <property name="threadPoolSign" value="order_single_thread"/>
+        <!-- 是否为数字型主键,数字主键支持 Integer,Long,Short三型 -->
+        <property name="isNumberPK" value="false"/>
+        <!-- VO对象Class类型,用于OR映射时构造VO对象 -->
+        <property name="voClass" value="com.cellsgame.game.module.pay.vo.OrderVO"/>
+        <!-- 存储表名 -->
+        <property name="tableName" value="order_data"/>
+        <!--
+                            关联键(外键)Map
+            key值为VO对象getRelationKeys函数返回的关联键数组的下标,
+            value为数组中该下标元素对应的关联键表名. 支持多个单一关联键
+                            不支持组合关联键
+         -->
+        <property name="relKeyPreName">
+            <map>
+                <entry key="0" value="order_playerId"/>
+            </map>
+        </property>
+    </bean>
+
+
+    <!-- 签到 -->
+    <bean id="checkInDAO" class="com.cellsgame.orm.BaseDAO">
+        <!-- 数据库策略 -->
+        <property name="DBStrategy" ref="redis_db_strategy"/>
+        <!-- 线程管理器 -->
+        <property name="threadManager" ref="threadManager"/>
+        <!-- 数据访问线程池名 -->
+        <property name="threadPoolSign" value="checkIn_data_single_threadpool"/>
+        <!-- 是否为数字型主键,数字主键支持 Integer,Long,Short三型 -->
+        <property name="isNumberPK" value="true"/>
+        <!-- VO对象Class类型,用于OR映射时构造VO对象 -->
+        <property name="voClass" value="com.cellsgame.game.module.player.vo.CheckInVO"/>
+        <!-- 存储表名 -->
+        <property name="tableName" value="player_check_in_data"/>
+        <!--
+                            关联键(外键)Map
+            key值为VO对象getRelationKeys函数返回的关联键数组的下标,
+            value为数组中该下标元素对应的关联键表名. 支持多个单一关联键
+                            不支持组合关联键
+         -->
+        <property name="relKeyPreName">
+            <map>
+                <entry key="0" value="check_in_playerId"/>
+            </map>
+        </property>
+    </bean>
+
+    <!-- 聊天 -->
+    <bean id="chatDAO" class="com.cellsgame.orm.BaseDAO">
+        <!-- 数据库策略 -->
+        <property name="DBStrategy" ref="redis_db_strategy"/>
+        <!-- 线程管理器 -->
+        <property name="threadManager" ref="threadManager"/>
+        <!-- 数据访问线程池名 -->
+        <property name="threadPoolSign" value="chat_single_thread"/>
+        <!-- 是否为数字型主键,数字主键支持 Integer,Long,Short三型 -->
+        <property name="isNumberPK" value="true"/>
+        <!-- VO对象Class类型,用于OR映射时构造VO对象 -->
+        <property name="voClass" value="com.cellsgame.game.module.chat.vo.ChatVO"/>
+        <!-- 存储表名 -->
+        <property name="tableName" value="chat_data"/>
+        <!--
+                            关联键(外键)Map
+            key值为VO对象getRelationKeys函数返回的关联键数组的下标,
+            value为数组中该下标元素对应的关联键表名. 支持多个单一关联键
+                            不支持组合关联键
+         -->
+        <property name="relKeyPreName">
+            <map>
+            </map>
+        </property>
+    </bean>
+    
+	<!-- 活动 -->
+	<bean id="activityDAO" class="com.cellsgame.orm.BaseDAO">
+        <!-- 数据库策略 -->
+        <property name="DBStrategy" ref="redis_db_strategy"/>
+        <!-- 线程管理器 -->
+        <property name="threadManager" ref="threadManager"/>
+        <!-- 数据访问线程池名 -->
+        <property name="threadPoolSign" value="activity_single_thread"/>
+        <!-- 是否为数字型主键,数字主键支持 Integer,Long,Short三型 -->
+        <property name="isNumberPK" value="false"/>
+        <!-- VO对象Class类型,用于OR映射时构造VO对象 -->
+        <property name="voClass" value="com.cellsgame.game.module.activity.vo.ActivityVO"/>
+        <!-- 存储表名 -->
+        <property name="tableName" value="act_data"/>
+        <!--
+                            关联键(外键)Map
+            key值为VO对象getRelationKeys函数返回的关联键数组的下标,
+            value为数组中该下标元素对应的关联键表名. 支持多个单一关联键
+                            不支持组合关联键
+         -->
+        <property name="relKeyPreName">
+            <map>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="activityGroupDataDAO" class="com.cellsgame.orm.BaseDAO">
+        <!-- 数据库策略 -->
+        <property name="DBStrategy" ref="redis_db_strategy"/>
+        <!-- 线程管理器 -->
+        <property name="threadManager" ref="threadManager"/>
+        <!-- 数据访问线程池名 -->
+        <property name="threadPoolSign" value="activity_single_thread"/>
+        <!-- 是否为数字型主键,数字主键支持 Integer,Long,Short三型 -->
+        <property name="isNumberPK" value="true" />
+        <!-- VO对象Class类型,用于OR映射时构造VO对象 -->
+        <property name="voClass" value="com.cellsgame.game.module.activity.vo.ActivityGroupDataVO"/>
+        <!-- 存储表名 -->
+        <property name="tableName" value="actGroupData_data"/>
+        <!--
+                            关联键(外键)Map
+            key值为VO对象getRelationKeys函数返回的关联键数组的下标,
+            value为数组中该下标元素对应的关联键表名. 支持多个单一关联键
+                            不支持组合关联键
+         -->
+        <property name="relKeyPreName">
+            <map>
+                <entry key="0" value="actGroupData_relId"/>
+            </map>
+        </property>
+    </bean>
+
+    
+    <bean id="activityCondRecDAO" class="com.cellsgame.orm.BaseDAO">
+        <!-- 数据库策略 -->
+        <property name="DBStrategy" ref="redis_db_strategy"/>
+        <!-- 线程管理器 -->
+        <property name="threadManager" ref="threadManager"/>
+        <!-- 数据访问线程池名 -->
+        <property name="threadPoolSign" value="activity_single_thread"/>
+        <!-- 是否为数字型主键,数字主键支持 Integer,Long,Short三型 -->
+        <property name="isNumberPK" value="true" />
+        <!-- VO对象Class类型,用于OR映射时构造VO对象 -->
+        <property name="voClass" value="com.cellsgame.game.module.activity.vo.ActivityCondRecVO"/>
+        <!-- 存储表名 -->
+        <property name="tableName" value="actCond_data"/>
+        <!--
+                            关联键(外键)Map
+            key值为VO对象getRelationKeys函数返回的关联键数组的下标,
+            value为数组中该下标元素对应的关联键表名. 支持多个单一关联键
+                            不支持组合关联键
+         -->
+        <property name="relKeyPreName">
+            <map>
+                <entry key="0" value="activityCond_relId"/>
+            </map>
+        </property>
+    </bean>
+    
+    <bean id="activityBevRecDAO" class="com.cellsgame.orm.BaseDAO">
+        <!-- 数据库策略 -->
+        <property name="DBStrategy" ref="redis_db_strategy"/>
+        <!-- 线程管理器 -->
+        <property name="threadManager" ref="threadManager"/>
+        <!-- 数据访问线程池名 -->
+        <property name="threadPoolSign" value="activity_single_thread"/>
+        <!-- 是否为数字型主键,数字主键支持 Integer,Long,Short三型 -->
+        <property name="isNumberPK" value="true"/>
+        <!-- VO对象Class类型,用于OR映射时构造VO对象 -->
+        <property name="voClass" value="com.cellsgame.game.module.activity.vo.ActivityBevRecVO"/>
+        <!-- 存储表名 -->
+        <property name="tableName" value="actBev_data"/>
+        <!--
+                            关联键(外键)Map
+            key值为VO对象getRelationKeys函数返回的关联键数组的下标,
+            value为数组中该下标元素对应的关联键表名. 支持多个单一关联键
+                            不支持组合关联键
+         -->
+        <property name="relKeyPreName">
+            <map>
+                <entry key="0" value="activityBev_relId"/>
+            </map>
+        </property>
+    </bean>
+    
+    
+    <bean id="activityGlobalDAO" class="com.cellsgame.orm.BaseDAO">
+        <!-- 数据库策略 -->
+        <property name="DBStrategy" ref="redis_db_strategy"/>
+        <!-- 线程管理器 -->
+        <property name="threadManager" ref="threadManager"/>
+        <!-- 数据访问线程池名 -->
+        <property name="threadPoolSign" value="activity_single_thread"/>
+        <!-- 是否为数字型主键,数字主键支持 Integer,Long,Short三型 -->
+        <property name="isNumberPK" value="true"/>
+        <!-- VO对象Class类型,用于OR映射时构造VO对象 -->
+        <property name="voClass" value="com.cellsgame.game.module.activity.vo.ActivityGlobalVO"/>
+        <!-- 存储表名 -->
+        <property name="tableName" value="actGlobal_data"/>
+        <!--
+                            关联键(外键)Map
+            key值为VO对象getRelationKeys函数返回的关联键数组的下标,
+            value为数组中该下标元素对应的关联键表名. 支持多个单一关联键
+                            不支持组合关联键
+         -->
+        <property name="relKeyPreName">
+            <map>
+                <entry key="0" value="activityGlobal_actId"/>
+            </map>
+        </property>
+    </bean>
+
+
+    
+    <!-- 数据访问对象配置 -->
+    <bean id="mailDAO" class="com.cellsgame.orm.BaseDAO">
+        <!-- 数据库策略 -->
+        <property name="DBStrategy" ref="redis_db_strategy"/>
+        <!-- 线程管理器 -->
+        <property name="threadManager" ref="threadManager"/>
+        <!-- 数据访问线程池名 -->
+        <property name="threadPoolSign" value="mail_data_single_threadpool"/>
+        <!-- 是否为数字型主键,数字主键支持 Integer,Long,Short三型 -->
+        <property name="isNumberPK" value="true"/>
+        <!-- VO对象Class类型,用于OR映射时构造VO对象 -->
+        <property name="voClass" value="com.cellsgame.game.module.mail.vo.MailVO"/>
+        <!-- 存储表名 -->
+        <property name="tableName" value="mail"/>
+        <!--
+                            关联键(外键)Map
+            key值为VO对象getRelationKeys函数返回的关联键数组的下标,
+            value为数组中该下标元素对应的关联键表名. 支持多个单一关联键
+                            不支持组合关联键
+         -->
+        <property name="relKeyPreName">
+            <map>
+                <entry key="0" value="mail_playerId"/>
+            </map>
+        </property>
+    </bean>
+
+    <!-- 数据访问对象配置 -->
+    <bean id="shopDAO" class="com.cellsgame.orm.BaseDAO">
+        <!-- 数据库策略 -->
+        <property name="DBStrategy" ref="redis_db_strategy"/>
+        <!-- 线程管理器 -->
+        <property name="threadManager" ref="threadManager"/>
+        <!-- 数据访问线程池名 -->
+        <property name="threadPoolSign" value="shop_data_single_threadpool"/>
+        <!-- 是否为数字型主键,数字主键支持 Integer,Long,Short三型 -->
+        <property name="isNumberPK" value="true"/>
+        <!-- VO对象Class类型,用于OR映射时构造VO对象 -->
+        <property name="voClass" value="com.cellsgame.game.module.shop.vo.ShopVO"/>
+        <!-- 存储表名 -->
+        <property name="tableName" value="shop"/>
+        <!--
+                            关联键(外键)Map
+            key值为VO对象getRelationKeys函数返回的关联键数组的下标,
+            value为数组中该下标元素对应的关联键表名. 支持多个单一关联键
+                            不支持组合关联键
+         -->
+        <property name="relKeyPreName">
+            <map>
+                <entry key="0" value="shop_playerId"/>
+            </map>
+        </property>
+    </bean>
+
+    <!-- 数据访问对象配置 -->
+    <bean id="shopItemRecordDAO" class="com.cellsgame.orm.BaseDAO">
+        <!-- 数据库策略 -->
+        <property name="DBStrategy" ref="redis_db_strategy"/>
+        <!-- 线程管理器 -->
+        <property name="threadManager" ref="threadManager"/>
+        <!-- 数据访问线程池名 -->
+        <property name="threadPoolSign" value="shop_data_single_threadpool"/>
+        <!-- 是否为数字型主键,数字主键支持 Integer,Long,Short三型 -->
+        <property name="isNumberPK" value="true"/>
+        <!-- VO对象Class类型,用于OR映射时构造VO对象 -->
+        <property name="voClass" value="com.cellsgame.game.module.shop.vo.ShopItemRecordVO"/>
+        <!-- 存储表名 -->
+        <property name="tableName" value="shop_item_record"/>
+        <!--
+                            关联键(外键)Map
+            key值为VO对象getRelationKeys函数返回的关联键数组的下标,
+            value为数组中该下标元素对应的关联键表名. 支持多个单一关联键
+                            不支持组合关联键
+         -->
+        <property name="relKeyPreName">
+            <map>
+                <entry key="0" value="shop_item_record_playerId"/>
+            </map>
+        </property>
+    </bean>
+
+    <!-- 数据访问对象配置 -->
+    <bean id="playerDAO" class="com.cellsgame.orm.BaseDAO">
+        <!-- 数据库策略 -->
+        <property name="DBStrategy" ref="redis_db_strategy"/>
+        <!-- 线程管理器 -->
+        <property name="threadManager" ref="threadManager"/>
+        <!-- 数据访问线程池名 -->
+        <property name="threadPoolSign" value="player_data_single_threadpool"/>
+        <!-- 是否为数字型主键,数字主键支持 Integer,Long,Short三型 -->
+        <property name="isNumberPK" value="true"/>
+        <!-- VO对象Class类型,用于OR映射时构造VO对象 -->
+        <property name="voClass" value="com.cellsgame.game.module.player.vo.PlayerVO"/>
+        <!-- 存储表名 -->
+        <property name="tableName" value="player"/>
+        <!--
+                            关联键(外键)Map
+            key值为VO对象getRelationKeys函数返回的关联键数组的下标,
+            value为数组中该下标元素对应的关联键表名. 支持多个单一关联键
+                            不支持组合关联键
+         -->
+        <property name="relKeyPreName">
+            <map>
+                <entry key="0" value="player_accountId"/>
+                <entry key="1" value="player_serverId"/>
+            </map>
+        </property>
+    </bean>
+
+    <!-- 数据访问对象配置 -->
+    <bean id="depotDAO" class="com.cellsgame.orm.BaseDAO">
+        <!-- 数据库策略 -->
+        <property name="DBStrategy" ref="redis_db_strategy"/>
+        <!-- 线程管理器 -->
+        <property name="threadManager" ref="threadManager"/>
+        <!-- 数据访问线程池名 -->
+        <property name="threadPoolSign" value="depot_data_single_threadpool"/>
+        <!-- 是否为数字型主键,数字主键支持 Integer,Long,Short三型 -->
+        <property name="isNumberPK" value="true"/>
+        <!-- VO对象Class类型,用于OR映射时构造VO对象 -->
+        <property name="voClass" value="com.cellsgame.game.module.depot.vo.DepotVO"/>
+        <!-- 存储表名 -->
+        <property name="tableName" value="depot"/>
+        <!-- 关联键(外键)Map key值为VO对象getRelationKeys函数返回的关联键数组的下标, value为数组中该下标元素对应的关联键表名.
+            支持多个单一关联键 不支持组合关联键 -->
+        <property name="relKeyPreName">
+            <map>
+                <entry key="0" value="depot_playerId"/>
+            </map>
+        </property>
+    </bean>
+    
+    <!-- 数据访问对象配置 -->
+    <bean id="guildDAO" class="com.cellsgame.orm.BaseDAO">
+        <!-- 数据库策略 -->
+        <property name="DBStrategy" ref="redis_db_strategy"/>
+        <!-- 线程管理器 -->
+        <property name="threadManager" ref="threadManager"/>
+        <!-- 数据访问线程池名 -->
+        <property name="threadPoolSign" value="guild_data_single_threadpool"/>
+        <!-- 是否为数字型主键,数字主键支持 Integer,Long,Short三型 -->
+        <property name="isNumberPK" value="true"/>
+        <!-- VO对象Class类型,用于OR映射时构造VO对象 -->
+        <property name="voClass" value="com.cellsgame.game.module.guild.vo.GuildVO"/>
+        <!-- 存储表名 -->
+        <property name="tableName" value="guild"/>
+        <!-- 关联键(外键)Map key值为VO对象getRelationKeys函数返回的关联键数组的下标, value为数组中该下标元素对应的关联键表名.
+            支持多个单一关联键 不支持组合关联键 -->
+        <property name="relKeyPreName">
+            <map/>
+        </property>
+    </bean>
+
+    <!-- 数据访问对象配置 -->
+    <bean id="guildMemberDAO" class="com.cellsgame.orm.BaseDAO">
+        <!-- 数据库策略 -->
+        <property name="DBStrategy" ref="redis_db_strategy"/>
+        <!-- 线程管理器 -->
+        <property name="threadManager" ref="threadManager"/>
+        <!-- 数据访问线程池名 -->
+        <property name="threadPoolSign" value="guild_member_data_single_threadpool"/>
+        <!-- 是否为数字型主键,数字主键支持 Integer,Long,Short三型 -->
+        <property name="isNumberPK" value="true"/>
+        <!-- VO对象Class类型,用于OR映射时构造VO对象 -->
+        <property name="voClass" value="com.cellsgame.game.module.guild.vo.GuildMemberVO"/>
+        <!-- 存储表名 -->
+        <property name="tableName" value="guildMember"/>
+        <!-- 关联键(外键)Map key值为VO对象getRelationKeys函数返回的关联键数组的下标, value为数组中该下标元素对应的关联键表名.
+            支持多个单一关联键 不支持组合关联键 -->
+        <property name="relKeyPreName">
+            <map>
+                <entry key="0" value="guildMemberPid"/>
+                <entry key="1" value="guildMemberguildID"/>
+            </map>
+        </property>
+    </bean>
+
+    <!-- 数据访问对象配置 -->
+    <bean id="guildReqDAO" class="com.cellsgame.orm.BaseDAO">
+        <!-- 数据库策略 -->
+        <property name="DBStrategy" ref="redis_db_strategy"/>
+        <!-- 线程管理器 -->
+        <property name="threadManager" ref="threadManager"/>
+        <!-- 数据访问线程池名 -->
+        <property name="threadPoolSign" value="guild_req_data_single_threadpool"/>
+        <!-- 是否为数字型主键,数字主键支持 Integer,Long,Short三型 -->
+        <property name="isNumberPK" value="true"/>
+        <!-- VO对象Class类型,用于OR映射时构造VO对象 -->
+        <property name="voClass" value="com.cellsgame.game.module.guild.vo.GuildReqVO"/>
+        <!-- 存储表名 -->
+        <property name="tableName" value="guildReq"/>
+        <!-- 关联键(外键)Map key值为VO对象getRelationKeys函数返回的关联键数组的下标, value为数组中该下标元素对应的关联键表名.
+            支持多个单一关联键 不支持组合关联键 -->
+        <property name="relKeyPreName">
+            <map>
+                <entry key="0" value="guildReqPid"/>
+                <entry key="1" value="guildReqGuildID"/>
+            </map>
+        </property>
+    </bean>
+
+    <!-- 数据访问对象配置 -->
+    <bean id="fixedDropDAO" class="com.cellsgame.orm.BaseDAO">
+        <!-- 数据库策略 -->
+        <property name="DBStrategy" ref="redis_db_strategy"/>
+        <!-- 线程管理器 -->
+        <property name="threadManager" ref="threadManager"/>
+        <!-- 数据访问线程池名 -->
+        <property name="threadPoolSign" value="fixed_drop_data_single_threadpool"/>
+        <!-- 是否为数字型主键,数字主键支持 Integer,Long,Short三型 -->
+        <property name="isNumberPK" value="true"/>
+        <!-- VO对象Class类型,用于OR映射时构造VO对象 -->
+        <property name="voClass" value="com.cellsgame.game.module.func.vo.FixedDropVO"/>
+        <!-- 存储表名 -->
+        <property name="tableName" value="fixed_drop"/>
+        <!-- 关联键(外键)Map key值为VO对象getRelationKeys函数返回的关联键数组的下标, value为数组中该下标元素对应的关联键表名.
+            支持多个单一关联键 不支持组合关联键 -->
+        <property name="relKeyPreName">
+            <map>
+                <entry key="0" value="fixed_drop_pid"/>
+            </map>
+        </property>
+    </bean>
+
+
+    <bean id="systemRecordDAO" class="com.cellsgame.orm.BaseDAO">
+        <!-- 数据库策略 -->
+        <property name="DBStrategy" ref="redis_db_strategy"/>
+        <!-- 线程管理器 -->
+        <property name="threadManager" ref="threadManager"/>
+        <!-- 数据访问线程池名 -->
+        <property name="threadPoolSign" value="system_record_single_threadpool"/>
+        <!-- 是否为数字型主键,数字主键支持 Integer,Long,Short三型 -->
+        <property name="isNumberPK" value="true"/>
+        <!-- VO对象Class类型,用于OR映射时构造VO对象 -->
+        <property name="voClass" value="com.cellsgame.game.module.sys.vo.SystemRecordVO"/>
+        <!-- 存储表名 -->
+        <property name="tableName" value="systemRecord"/>
+        <!-- 关联键(外键)Map key值为VO对象getRelationKeys函数返回的关联键数组的下标, value为数组中该下标元素对应的关联键表名.
+            支持多个单一关联键 不支持组合关联键 -->
+        <property name="relKeyPreName">
+            <map/>
+        </property>
+    </bean>
+
+    <bean id="friendReqDAO" class="com.cellsgame.orm.BaseDAO">
+        <!-- 数据库策略 -->
+        <property name="DBStrategy" ref="redis_db_strategy"/>
+        <!-- 线程管理器 -->
+        <property name="threadManager" ref="threadManager"/>
+        <!-- 数据访问线程池名 -->
+        <property name="threadPoolSign" value="friend_DB_Threads"/>
+        <!-- 是否为数字型主键,数字主键支持 Integer,Long,Short三型 -->
+        <property name="isNumberPK" value="true"/>
+        <!-- VO对象Class类型,用于OR映射时构造VO对象 -->
+        <property name="voClass" value="com.cellsgame.game.module.friend.vo.FriendReqVO"/>
+        <!-- 存储表名 -->
+        <property name="tableName" value="friendReq"/>
+        <!-- 关联键(外键)Map key值为VO对象getRelationKeys函数返回的关联键数组的下标, value为数组中该下标元素对应的关联键表名.
+            支持多个单一关联键 不支持组合关联键 -->
+        <property name="relKeyPreName">
+            <map>
+            </map>
+        </property>
+    </bean>
+    <bean id="friendListDAO" class="com.cellsgame.orm.BaseDAO">
+        <!-- 数据库策略 -->
+        <property name="DBStrategy" ref="redis_db_strategy"/>
+        <!-- 线程管理器 -->
+        <property name="threadManager" ref="threadManager"/>
+        <!-- 数据访问线程池名 -->
+        <property name="threadPoolSign" value="friend_DB_Threads"/>
+        <!-- 是否为数字型主键,数字主键支持 Integer,Long,Short三型 -->
+        <property name="isNumberPK" value="true"/>
+        <!-- VO对象Class类型,用于OR映射时构造VO对象 -->
+        <property name="voClass" value="com.cellsgame.game.module.friend.vo.FriendListVO"/>
+        <!-- 存储表名 -->
+        <property name="tableName" value="friendList"/>
+        <!-- 关联键(外键)Map key值为VO对象getRelationKeys函数返回的关联键数组的下标, value为数组中该下标元素对应的关联键表名.
+            支持多个单一关联键 不支持组合关联键 -->
+        <property name="relKeyPreName">
+            <map>
+                <entry key="0" value="friendList_pid"/>
+            </map>
+        </property>
+    </bean>
+    <bean id="friendBlessDAO" class="com.cellsgame.orm.BaseDAO">
+        <!-- 数据库策略 -->
+        <property name="DBStrategy" ref="redis_db_strategy"/>
+        <!-- 线程管理器 -->
+        <property name="threadManager" ref="threadManager"/>
+        <!-- 数据访问线程池名 -->
+        <property name="threadPoolSign" value="friend_DB_Threads"/>
+        <!-- 是否为数字型主键,数字主键支持 Integer,Long,Short三型 -->
+        <property name="isNumberPK" value="true"/>
+        <!-- VO对象Class类型,用于OR映射时构造VO对象 -->
+        <property name="voClass" value="com.cellsgame.game.module.friend.vo.FriendBlessVO"/>
+        <!-- 存储表名 -->
+        <property name="tableName" value="friendBless"/>
+        <!-- 关联键(外键)Map key值为VO对象getRelationKeys函数返回的关联键数组的下标, value为数组中该下标元素对应的关联键表名.
+            支持多个单一关联键 不支持组合关联键 -->
+        <property name="relKeyPreName">
+            <map>
+                <entry key="0" value="friendBless_pid"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="questProcDAO" class="com.cellsgame.orm.BaseDAO">
+        <!-- 数据库策略 -->
+        <property name="DBStrategy" ref="redis_db_strategy"/>
+        <!-- 线程管理器 -->
+        <property name="threadManager" ref="threadManager"/>
+        <!-- 数据访问线程池名 -->
+        <property name="threadPoolSign" value="quest_sigle_thread"/>
+        <!-- 是否为数字型主键,数字主键支持 Integer,Long,Short三型 -->
+        <property name="isNumberPK" value="true"/>
+        <!-- VO对象Class类型,用于OR映射时构造VO对象 -->
+        <property name="voClass" value="com.cellsgame.game.module.quest.vo.QuestProcVO"/>
+        <!-- 存储表名 -->
+        <property name="tableName" value="questProc"/>
+        <!-- 关联键(外键)Map key值为VO对象getRelationKeys函数返回的关联键数组的下标, value为数组中该下标元素对应的关联键表名.
+            支持多个单一关联键 不支持组合关联键 -->
+        <property name="relKeyPreName">
+            <map>
+                <entry key="0" value="questProc_pid"/>
+            </map>
+        </property>
+    </bean>
+
+     <bean id="questRecDAO" class="com.cellsgame.orm.BaseDAO">
+        <!-- 数据库策略 -->
+        <property name="DBStrategy" ref="redis_db_strategy"/>
+        <!-- 线程管理器 -->
+        <property name="threadManager" ref="threadManager"/>
+        <!-- 数据访问线程池名 -->
+        <property name="threadPoolSign" value="quest_sigle_thread"/>
+        <!-- 是否为数字型主键,数字主键支持 Integer,Long,Short三型 -->
+        <property name="isNumberPK" value="true"/>
+        <!-- VO对象Class类型,用于OR映射时构造VO对象 -->
+        <property name="voClass" value="com.cellsgame.game.module.quest.vo.QuestRecVO"/>
+        <!-- 存储表名 -->
+        <property name="tableName" value="questRec"/>
+        <!-- 关联键(外键)Map key值为VO对象getRelationKeys函数返回的关联键数组的下标, value为数组中该下标元素对应的关联键表名.
+            支持多个单一关联键 不支持组合关联键 -->
+        <property name="relKeyPreName">
+            <map>
+                <entry key="0" value="questRec_pid"/>
+            </map>
+        </property>
+    </bean>
+
+	<bean id="statsDAO" class="com.cellsgame.orm.BaseDAO">
+		<!-- 数据库策略 -->
+		<property name="DBStrategy" ref="redis_db_strategy" />
+		<!-- 线程管理器 -->
+		<property name="threadManager" ref="threadManager" />
+		<!-- 数据访问线程池名 -->
+		<property name="threadPoolSign" value="stats_sigle_thread" />
+		<!-- 是否为数字型主键,数字主键支持 Integer,Long,Short三型 -->
+		<property name="isNumberPK" value="true" />
+		<!-- VO对象Class类型,用于OR映射时构造VO对象 -->
+		<property name="voClass"
+			value="com.cellsgame.game.module.stats.vo.StatsVO" />
+		<!-- 存储表名 -->
+		<property name="tableName" value="stats" />
+		<!-- 关联键(外键)Map key值为VO对象getRelationKeys函数返回的关联键数组的下标, value为数组中该下标元素对应的关联键表名.
+			支持多个单一关联键 不支持组合关联键 -->
+		<property name="relKeyPreName">
+			<map>
+				<entry key="0" value="stats_pid" />
+			</map>
+		</property>
+	</bean>
+    
+	
+    <bean id="rankDAO" class="com.cellsgame.orm.BaseDAO">
+        <!-- 数据库策略 -->
+        <property name="DBStrategy" ref="redis_db_strategy"/>
+        <!-- 线程管理器 -->
+        <property name="threadManager" ref="threadManager"/>
+        <!-- 数据访问线程池名 -->
+        <property name="threadPoolSign" value="rank_single_thread"/>
+        <!-- 是否为数字型主键,数字主键支持 Integer,Long,Short三型 -->
+        <property name="isNumberPK" value="true"/>
+        <!-- VO对象Class类型,用于OR映射时构造VO对象 -->
+        <property name="voClass" value="com.cellsgame.game.module.rank.vo.RankVO"/>
+        <!-- 存储表名 -->
+        <property name="tableName" value="rank"/>
+        <!-- 关联键(外键)Map key值为VO对象getRelationKeys函数返回的关联键数组的下标, value为数组中该下标元素对应的关联键表名.
+            支持多个单一关联键 不支持组合关联键 -->
+        <property name="relKeyPreName">
+            <map>
+            </map>
+        </property>
+    </bean>
+    
+    <bean id="rankLikeRecDAO" class="com.cellsgame.orm.BaseDAO">
+        <!-- 数据库策略 -->
+        <property name="DBStrategy" ref="redis_db_strategy"/>
+        <!-- 线程管理器 -->
+        <property name="threadManager" ref="threadManager"/>
+        <!-- 数据访问线程池名 -->
+        <property name="threadPoolSign" value="rank_single_thread"/>
+        <!-- 是否为数字型主键,数字主键支持 Integer,Long,Short三型 -->
+        <property name="isNumberPK" value="true"/>
+        <!-- VO对象Class类型,用于OR映射时构造VO对象 -->
+        <property name="voClass" value="com.cellsgame.game.module.rank.vo.RankLikeRecVO"/>
+        <!-- 存储表名 -->
+        <property name="tableName" value="rkLkRec"/>
+        <!-- 关联键(外键)Map key值为VO对象getRelationKeys函数返回的关联键数组的下标, value为数组中该下标元素对应的关联键表名.
+            支持多个单一关联键 不支持组合关联键 -->
+        <property name="relKeyPreName">
+            <map>
+            	<entry key="0" value="rkLkRec_pid"/>
+            </map>
+        </property>
+    </bean>
+
+    <!-- 数据访问对象配置 -->
+    <bean id="heroDAO" class="com.cellsgame.orm.BaseDAO">
+        <!-- 数据库策略 -->
+        <property name="DBStrategy" ref="redis_db_strategy"/>
+        <!-- 线程管理器 -->
+        <property name="threadManager" ref="threadManager"/>
+        <!-- 数据访问线程池名 -->
+        <property name="threadPoolSign" value="hero_data_single_threadpool"/>
+        <!-- 是否为数字型主键,数字主键支持 Integer,Long,Short三型 -->
+        <property name="isNumberPK" value="true"/>
+        <!-- VO对象Class类型,用于OR映射时构造VO对象 -->
+        <property name="voClass" value="com.cellsgame.game.module.hero.vo.HeroVO"/>
+        <!-- 存储表名 -->
+        <property name="tableName" value="hero"/>
+        <!--
+                            关联键(外键)Map
+            key值为VO对象getRelationKeys函数返回的关联键数组的下标,
+            value为数组中该下标元素对应的关联键表名. 支持多个单一关联键
+                            不支持组合关联键
+         -->
+        <property name="relKeyPreName">
+            <map>
+                <entry key="0" value="hero_playerId"/>
+            </map>
+        </property>
+    </bean>
+
+    <!-- 数据访问对象配置 -->
+    <bean id="skillDAO" class="com.cellsgame.orm.BaseDAO">
+        <!-- 数据库策略 -->
+        <property name="DBStrategy" ref="redis_db_strategy"/>
+        <!-- 线程管理器 -->
+        <property name="threadManager" ref="threadManager"/>
+        <!-- 数据访问线程池名 -->
+        <property name="threadPoolSign" value="skill_data_single_threadpool"/>
+        <!-- 是否为数字型主键,数字主键支持 Integer,Long,Short三型 -->
+        <property name="isNumberPK" value="true"/>
+        <!-- VO对象Class类型,用于OR映射时构造VO对象 -->
+        <property name="voClass" value="com.cellsgame.game.module.skill.vo.SkillVO"/>
+        <!-- 存储表名 -->
+        <property name="tableName" value="skill"/>
+        <!--
+                            关联键(外键)Map
+            key值为VO对象getRelationKeys函数返回的关联键数组的下标,
+            value为数组中该下标元素对应的关联键表名. 支持多个单一关联键
+                            不支持组合关联键
+         -->
+        <property name="relKeyPreName">
+            <map>
+                <entry key="0" value="skill_playerId"/>
+                <entry key="1" value="skill_holderId"/>
+            </map>
+        </property>
+    </bean>
+</beans>

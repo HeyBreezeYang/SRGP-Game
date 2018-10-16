@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Configuration status="off" monitorInterval="1800" >
+    <properties>
+        <property name="LOG_HOME">/data/GM/file/timer</property>
+        <property name="ERROR_LOG">error</property>
+    </properties>
+
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d %-5p (%F:%L) - %m%n" />
+        </Console>
+
+        <RollingRandomAccessFile name="ErrorLog"  fileName="${LOG_HOME}/${ERROR_LOG}/GmError.log"  filePattern="${LOG_HOME}/${ERROR_LOG}/GmError_%d{yyyy-MM-dd}.log">
+            <PatternLayout pattern="%d %-5p (%F:%L) - %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"/>
+                <SizeBasedTriggeringPolicy size="32 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingRandomAccessFile>
+    </Appenders>
+
+    <Loggers>
+
+        <root level="info">
+            <appender-ref ref="ErrorLog" level="error"/>
+            <appender-ref ref="Console" level="info"/>
+        </root>
+
+    </Loggers>
+</Configuration>

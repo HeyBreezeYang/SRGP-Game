@@ -1,0 +1,1 @@
+"ID{id,int}(idx)",,"ID{goodsId,int}","{limit,ints}(num,lt)","{purchase,json_func}(json,g)","{costs,json_funcs}(json,p1)","(num,p2)","(num,lb)","{group,int}","{weight,int}","{visibleLv,int}(num,vl)","{refreshRequireLv,ints}","{purchaseLv,int}(num,plv)","VIP{refreshRequireVip,int}","VIP{purchaseVip,int}(num,vplv)","{refreshRequireGuildLv,ints}","{purchaseGuildLevel,int}(num,glv)"

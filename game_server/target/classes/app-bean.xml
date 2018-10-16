@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util" xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+       http://www.springframework.org/schema/context 
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/util
+       http://www.springframework.org/schema/util/spring-util-4.2.xsd
+       ">
+    <context:component-scan base-package="com.cellsgame"/>
+
+    <bean id="playerBO" class="com.cellsgame.game.module.player.bo.impl.PlayerBOImpl">
+        <property name="defaultPlayerConfig" ref="defaultPlayerConfig"/>
+        <property name="gameConfig" ref="gameConfig"/>
+        <property name="cardBO" ref="cardBO" />
+        <property name="goodsBO" ref="goodsBO" />
+    </bean>
+
+
+    <bean id="shopItemRecordBO" class="com.cellsgame.game.module.shop.bo.impl.ShopItemRecordBOImpl"/>
+
+
+    <bean id="shopBO" class="com.cellsgame.game.module.shop.bo.impl.ShopBOImpl">
+        <property name="shopItemRecordBO" ref="shopItemRecordBO"/>
+        <property name="playerBO" ref="playerBO"/>
+    </bean>
+
+    <bean id="depotBO" class="com.cellsgame.game.module.depot.bo.impl.EventDepotBOImpl">
+        <constructor-arg index="0">
+            <bean class="com.cellsgame.game.module.depot.bo.impl.DepotBOImpl">
+                <property name="defaultPlayerConfig" ref="defaultPlayerConfig"/>
+            </bean>
+        </constructor-arg>
+    </bean>
+
+    <bean id="systemBO" class="com.cellsgame.game.module.sys.impl.SystemBOImpl"/>
+
+    <bean id="goodsBO" class="com.cellsgame.game.module.goods.bo.impl.GoodsBOImpl"/>
+
+
+    <bean id="connectionListener" class="com.cellsgame.game.module.ConnectionListener">
+        <property name="playerBO" ref="playerBO"/>
+    </bean>
+
+    <bean id="chatBO" class="com.cellsgame.game.module.chat.impl.ChatBOImpl"/>
+
+    <bean id="friendBO" class="com.cellsgame.game.module.friend.bo.impl.FriendsBOImpl">
+        <property name="playerBO" ref="playerBO"/>
+        <property name="mailBO" ref="mailBO"/>
+        <property name="systemBO" ref="systemBO"/>
+    </bean>
+
+    <bean id="guildBO" class="com.cellsgame.game.module.guild.bo.impl.GuildBOImpl">
+        <property name="mailBO" ref="mailBO"/>
+        <property name="systemBO" ref="systemBO"/>
+        <property name="activityBO" ref="activityBO"/>
+        <property name="rankBO" ref="rankBO"/>
+        <property name="goodsBO" ref="goodsBO" />
+        <property name="depotBO" ref="depotBO" />
+    </bean>
+
+	<bean id="storeBO" class="com.cellsgame.game.module.store.bo.impl.StoreBOImpl">
+    </bean>
+    
+    <bean id="mailBO" class="com.cellsgame.game.module.mail.bo.impl.MailBOImpl">
+    </bean>
+    
+    <bean id="rankBO" class="com.cellsgame.game.module.rank.bo.impl.RankBOImpl">
+    </bean>
+
+    <!-- 活动模块 -->
+    <bean id="activityBO" class="com.cellsgame.game.module.activity.bo.impl.ActivityBOImpl"/>
+    <bean id="activityEvent" class="com.cellsgame.game.module.activity.process.ActivityEventListener"/>
+
+
+    <bean class="com.cellsgame.game.module.sys.funOpen.FunOpenListener" id="funOpenListener"/>
+    <bean class="com.cellsgame.game.module.log.GameLogListener" id="gameLogListener"/>
+    <bean class="com.cellsgame.game.module.chat.NotifyListener" id="notifyListener">
+        <property name="chatBO" ref="chatBO"/>
+    </bean>
+    
+
+    <bean class="com.cellsgame.game.core.event.GameEventManager">
+        <property name="staticListeners" ref="staticListeners"/>
+    </bean>
+
+    <bean id="orderBO" class="com.cellsgame.game.module.pay.bo.impl.OrderBOImpl" >
+        <property name="playerBO" ref="playerBO" />
+    </bean>
+    
+    <bean id="cardBO" class="com.cellsgame.game.module.card.bo.impl.CardBOImpl" />
+
+	<bean id="questBO" class="com.cellsgame.game.module.quest.bo.impl.QuestBOImpl">
+		<property name="playerBO" ref="playerBO"/>
+    </bean>
+
+    <bean id="statsBO" class="com.cellsgame.game.module.stats.bo.impl.StatsBOImpl">
+    </bean>
+    
+    <!-- TODO added by luojf945 -->
+    <bean id="heroBO" class="com.cellsgame.game.module.hero.bo.impl.HeroBOImpl" />
+
+    <bean id="skillBO" class="com.cellsgame.game.module.skill.bo.impl.SkillBOImpl" />
+
+    <bean id="guildEvtListener" class="com.cellsgame.game.module.guild.evt.GuildEvtListener">
+    </bean>
+    
+    <!-- 事件监听-->
+    <util:list id="staticListeners" scope="singleton" value-type="com.cellsgame.game.core.event.StaticEvtListener">
+        <!--优先执行功能开启检查-->
+        <ref bean="depotBO"/>
+        <ref bean="mailBO"/>
+        <ref bean="playerBO"/>
+        <ref bean="shopBO"/>
+        <ref bean="rankBO"/>
+        <ref bean="activityBO"/>
+        <ref bean="activityEvent"/>
+        <ref bean="gameLogListener"/>
+        <ref bean="friendBO"/>
+        <ref bean="notifyListener"/>
+        <ref bean="rankBO"/>
+        <ref bean="questBO"/>
+        <ref bean="statsBO"/>
+        <ref bean="guildEvtListener" />
+    </util:list>
+    
+</beans>
+

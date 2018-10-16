@@ -1,0 +1,1 @@
+"关卡ID{id,int}(idx)","关卡类型{type,int}(num,type)","机器人{robot,int}(num,robot)","最小战斗力范围{minForcePercent,int}","最大战斗力范围{maxForcePercent,int}","敌方数据修正{targetRatio,ints}","关卡奖励{prizes,json_funcs}(json,prizes)","转盘奖励序列{dialSerial,json_intmap}","转盘序列消耗{dialCost,ints}{fun,dialCost)",

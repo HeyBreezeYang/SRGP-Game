@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Implementation-Version: fbc352181e2df76ebaa562f3254efc7766e6ece7 2014-
+ 07-11 14:17 -0300
+Build-Jdk: 1.6.0_45
+Built-By: tbernard
+Specification-Title: jzmq
+Created-By: Apache Maven
+Specification-Version: 3.1.0
+Main-Class: org.zeromq.App
+Archiver-Version: Plexus Archiver
+

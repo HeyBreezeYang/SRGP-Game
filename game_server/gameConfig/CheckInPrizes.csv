@@ -1,0 +1,1 @@
+"ID(idx){id,int}","{days,int}(num,days)","{prizes,json_funcs}(json,prizes)","(str,n)","(str,d)",1,

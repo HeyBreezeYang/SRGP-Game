@@ -1,0 +1,10 @@
+[15:24:19] [WARN ][main] - [MessageHandler :26  ] - message processor service not set, message will be processed in the connection io thread. 
+[15:24:20] [WARN ][main] - [ServerBootstrap:146 ] - Unknown channel option 'SO_KEEPALIVE' for channel '[id: 0x95d6f1ec]'
+[15:24:20] [WARN ][main] - [ServerBootstrap:146 ] - Unknown channel option 'TCP_NODELAY' for channel '[id: 0x95d6f1ec]'
+[15:24:20] [ERROR][FileWatchdog] - [Main           :154 ] - logic server configuration was changed, latest size of server = 1
+[15:24:20] [WARN ][FileWatchdog] - [MessageHandler :26  ] - message processor service not set, message will be processed in the connection io thread. 
+[15:24:21] [ERROR][FileWatchdog] - [Main           :209 ] - dest[id=kd_tx_gs1001, host=192.168.10.193, port=7002] is unreachable, try connect after 4 seconds automatically
+[15:24:31] [ERROR][JobScanner] - [Main           :209 ] - dest[id=kd_tx_gs1001, host=192.168.10.193, port=7002] is unreachable, try connect after 10 seconds automatically
+[15:24:42] [ERROR][JobScanner] - [Main           :209 ] - dest[id=kd_tx_gs1001, host=192.168.10.193, port=7002] is unreachable, try connect after 20 seconds automatically
+[15:25:03] [ERROR][JobScanner] - [Main           :209 ] - dest[id=kd_tx_gs1001, host=192.168.10.193, port=7002] is unreachable, try connect after 40 seconds automatically
+[15:25:44] [ERROR][JobScanner] - [Main           :209 ] - dest[id=kd_tx_gs1001, host=192.168.10.193, port=7002] is unreachable, try connect after 80 seconds automatically

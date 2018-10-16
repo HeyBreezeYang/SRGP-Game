@@ -1,0 +1,1 @@
+"配置ID(idx){id,int}","作用类型{types,ints}(nums,types)","科技类型(num,type)","等级带来的属性值{lvValue,json_intAry}(json,lvValue)","升级到当前等级消耗的军团贡献{upLVCostGuildCoin,ints}(nums,upLVCostGuildCoin)","升级条件{upLVPreChecks,json_techCheck}(json,upLVPreChecks)","名称","科技图标(str,p2)","描述","作用类型为空时描述(json,descValue)","名称(fun,name)","描述(fun,desc)",

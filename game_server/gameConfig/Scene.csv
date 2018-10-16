@@ -1,0 +1,2 @@
+"场景ID{id,int}(idx)","场景名称(str,name)","出生地最小X{initMinX,int}","出生地最小Y{initMinY,int}","出生地最大X{initMaxX,int}","出生地最大Y{initMaxY,int}","可行走(num,actArea)","半透明(num,traArea)",
+30000001,人类魔法城,1150,1000,1500,1250,10000001,10000002,

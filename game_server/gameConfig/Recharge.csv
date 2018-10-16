@@ -1,0 +1,7 @@
+"ID(idx){id,int}","(str,nm)","ID{itemId,str}(str,itemId)","(num,type)","(str,desc)","(num,rate)","{orderMoney,int}(num,Price)","{prize,json_funcs}(json,Diamonds)","¦Ã{fristPrize,json_funcs}(json,FirstAdd)","{extraPrize,json_funcs}",1
+70200001,§³,boss_gold_3,1,§³,1,1,"[{type:9,value:1},{type:4,param:80400002,value:60}]","[{type:4,param:80400002,value:60}]",[],170200001
+70200002,§³,boss_gold_4,1,§³,1,3000,"[{type:9,value:30},{type:4,param:80400002,value:300}]","[{type:4,param:80400002,value:300}]",[],170200002
+70200003,,boss_gold_5,1,,1,6800,"[{type:9,value:68},{type:4,param:80400002,value:680}]","[{type:4,param:80400002,value:680}]",[],170200003
+70200004,,boss_gold_6,1,,1,19800,"[{type:9,value:198},{type:4,param:80400002,value:1980}]","[{type:4,param:80400002,value:1980}]",[],170200004
+70200005,,boss_gold_7,1,,1,32800,"[{type:9,value:328},{type:4,param:80400002,value:3280}]","[{type:4,param:80400002,value:3280}]",[],170200005
+70200006,§³,boss_gold_8,1,§³,1,64800,"[{type:9,value:648},{type:4,param:80400002,value:6480}]","[{type:4,param:80400002,value:6480}]",[],170200006

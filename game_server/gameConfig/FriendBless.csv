@@ -1,0 +1,1 @@
+"ID{id,int}(idx)","玩家等级{lv,int}(num,lv)","单次祝福奖励{blessPrize,json_funcs}(json,blessPrize)","被祝福奖励{blessedPrize,json_funcsAry}(json,blessedPrize)",

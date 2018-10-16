@@ -1,0 +1,1 @@
+"ID{id,int}(idx)","{level,int}(num,lv)","(str,d)","(str,dp)","(str,p1)","(str,bbody)","(str,gbody)","{reqExp,int}(num,rEp)","{worshipPrz,int}(num,sly)","{funcTimeLimit,int}(num,fTL)","CD{funcTimeRevCd,int}(num,Cd)","{funcTimeRevNum,int}(num,cs)","{upLevelPrize,json_funcs}(json,jl)","(funcs,d2)","(str,dateSence)",

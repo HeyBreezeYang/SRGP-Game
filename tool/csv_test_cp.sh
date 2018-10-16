@@ -1,0 +1,1 @@
+cp ~/Work/huyukeji/策划/配置输出/csvtest/* ~/Work/huyukeji/WZCQ/Server/game_server/gameConfig

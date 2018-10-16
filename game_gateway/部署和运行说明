@@ -1,0 +1,21 @@
+Centos 7.0下Jrebel热更新命令模板
+java -agentpath:[JRebel root folder]/lib/libjrebel64.so -Drebel.remoting_plugin=true -Drebel.remoting_port=[port number] foo.bar.MyApp
+设置服务端密码
+java -jar /opt/jrebel/jrebel.jar -set-remote-password  110to119
+
+部署：
+# m2-lib是从maven私库里取下导出的，保证编译运行和部署运行都是同一套jar
+cd ~/Work/huyukeji/WZCQ/Server/game_gateway
+scp -r m2-lib root@192.168.10.165:/home/huyukeji/wzcq/servers/game_gateway/
+scp -r resources/* root@192.168.10.165:/home/huyukeji/wzcq/servers/game_gateway
+scp target/gateway-0.0.2-SNAPSHOT.jar root@192.168.10.165:/home/huyukeji/wzcq/servers/game_gateway/gateway.jar
+
+ssh root@192.168.10.165
+账号：root
+密码：tiandong
+cd /home/huyukeji/wzcq/servers/game_gateway
+
+直接运行
+java -server  -Djava.nio.channels.spi.SelectorProvider=sun.nio.ch.EPollSelectorProvider -XX:+UseFastAccessorMethods -Xms1G -Xmx1g -verbose:gc -XX:+DisableExplicitGC -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -XX:CMSInitiatingOccupancyFraction=70 -XX:MaxTenuringThreshold=15 -XX:+UseCMSCompactAtFullCollection -XX:CMSFullGCsBeforeCompaction=0 -XX:+CMSParallelRemarkEnabled -XX:SoftRefLRUPolicyMSPerMB=0 -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintHeapAtGC -Xloggc:gc.log  -cp :m2-lib/*:gateway.jar com.cellsgame.gateway.Main
+Jrebel热更运行
+java -server -agentpath:/opt/jrebel/lib/libjrebel64.so -Drebel.remoting_plugin=true -Drebel.remoting_port=8889 -Djava.nio.channels.spi.SelectorProvider=sun.nio.ch.EPollSelectorProvider -XX:+UseFastAccessorMethods -Xms1G -Xmx1g -verbose:gc -XX:+DisableExplicitGC -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -XX:CMSInitiatingOccupancyFraction=70 -XX:MaxTenuringThreshold=15 -XX:+UseCMSCompactAtFullCollection -XX:CMSFullGCsBeforeCompaction=0 -XX:+CMSParallelRemarkEnabled -XX:SoftRefLRUPolicyMSPerMB=0 -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintHeapAtGC -Xloggc:gc.log  -cp :m2-lib/*:gateway.jar com.cellsgame.gateway.Main

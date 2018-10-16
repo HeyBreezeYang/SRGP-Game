@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.cellsgame</groupId>
+    <artifactId>gateway</artifactId>
+    <version>0.0.2-SNAPSHOT</version>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>19.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>4.1.12.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.cellsgame</groupId>
+            <artifactId>log_pom</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.perf4j</groupId>
+            <artifactId>perf4j</artifactId>
+            <version>0.9.16</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.cellsgame</groupId>
+            <artifactId>utils</artifactId>
+            <version>0.0.2-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.cellsgame</groupId>
+            <artifactId>buffer</artifactId>
+            <version>0.0.2-SNAPSHOT</version>
+        </dependency>
+        
+		<dependency>
+		  <groupId>google</groupId>
+		  <artifactId>brotli_dec</artifactId>
+		  <version>1.0</version>
+		</dependency>
+        
+		<dependency>
+		  <groupId>google</groupId>
+		  <artifactId>brotli_enc</artifactId>
+		  <version>1.0</version>
+		</dependency>
+        
+    </dependencies>
+    <build>
+        <finalName>gateway</finalName>
+        <sourceDirectory>src/main/java</sourceDirectory>
+        <testSourceDirectory>/src/test/java</testSourceDirectory>
+        <outputDirectory>target/classes</outputDirectory>
+        <testOutputDirectory>target/test-classes</testOutputDirectory>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <excludes>
+                        <exclude>**/*.xml</exclude>
+                        <exclude>**/*.conf</exclude>
+                        <exclude>**/*.properties</exclude>
+                        <exclude>**/*.lua</exclude>
+                        <exclude>**/*.sh</exclude>
+                    </excludes>
+                    <!--<classifier>${os.detected.classifier}</classifier>-->
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.0.1</version>
+                <configuration>
+                    <attach>true</attach>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    <distributionManagement>
+        <repository>
+            <id>nexus-snapshots</id>
+            <url>http://192.168.1.48:8081/nexus/content/repositories/snapshots</url>
+        </repository>
+    </distributionManagement>
+</project>

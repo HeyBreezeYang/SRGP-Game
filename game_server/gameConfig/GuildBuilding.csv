@@ -1,0 +1,1 @@
+"配置ID(idx){id,int}","建筑类型{type,int}(num,type)","等级{lv,int}(num,lv)","每日消耗的家族资金{cosMnyPerDay,int}(num,cosMnyPerDay)","升级到当前等级消耗{updateCost,json_funcs}(json,updateCost)","参数{param,int}(num,param)","建筑描述","建筑描述(fun,desc)",

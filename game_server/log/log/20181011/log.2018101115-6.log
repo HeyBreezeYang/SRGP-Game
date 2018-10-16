@@ -1,0 +1,133 @@
+[system][3412][2018-10-11 15:08:33][WARN][main][com.cellsgame.orm.dbimpl.JedisPool:24]redis ip:192.168.10.193  port: 6379 password:
+[][3412][2018-10-11 15:08:33][WARN][main][com.cellsgame.orm.dbimpl.JedisPool:24]redis ip:192.168.10.193  port: 6379 password:
+[system][4312][2018-10-11 15:08:34][WARN][main][com.cellsgame.game.Bootstrap:109]-->http server host : 192.168.10.115, port : 7001
+[][4312][2018-10-11 15:08:34][WARN][main][com.cellsgame.game.Bootstrap:109]-->http server host : 192.168.10.115, port : 7001
+[][4341][2018-10-11 15:08:34][INFO][main][org.eclipse.jetty.util.log:192]Logging initialized @4440ms to org.eclipse.jetty.util.log.Slf4jLog
+[][4341][2018-10-11 15:08:34][INFO][main][org.eclipse.jetty.util.log:192]Logging initialized @4440ms to org.eclipse.jetty.util.log.Slf4jLog
+[][4448][2018-10-11 15:08:34][INFO][main][org.eclipse.jetty.server.Server:372]jetty-9.4.6.v20170531
+[][4448][2018-10-11 15:08:34][INFO][main][org.eclipse.jetty.server.Server:372]jetty-9.4.6.v20170531
+[][4501][2018-10-11 15:08:34][INFO][main][org.eclipse.jetty.server.session:364]DefaultSessionIdManager workerName=node0
+[][4501][2018-10-11 15:08:34][INFO][main][org.eclipse.jetty.server.session:364]DefaultSessionIdManager workerName=node0
+[][4501][2018-10-11 15:08:34][INFO][main][org.eclipse.jetty.server.session:369]No SessionScavenger set, using defaults
+[][4501][2018-10-11 15:08:34][INFO][main][org.eclipse.jetty.server.session:369]No SessionScavenger set, using defaults
+[][4505][2018-10-11 15:08:34][INFO][main][org.eclipse.jetty.server.session:149]Scavenging every 600000ms
+[][4505][2018-10-11 15:08:34][INFO][main][org.eclipse.jetty.server.session:149]Scavenging every 600000ms
+[][4548][2018-10-11 15:08:34][INFO][main][org.eclipse.jetty.server.handler.ContextHandler:788]Started o.e.j.s.ServletContextHandler@6754ef00{/game,null,AVAILABLE}
+[][4548][2018-10-11 15:08:34][INFO][main][org.eclipse.jetty.server.handler.ContextHandler:788]Started o.e.j.s.ServletContextHandler@6754ef00{/game,null,AVAILABLE}
+[][4684][2018-10-11 15:08:34][INFO][main][org.eclipse.jetty.server.AbstractConnector:280]Started ServerConnector@38d5b107{HTTP/1.1,[http/1.1]}{0.0.0.0:7001}
+[][4684][2018-10-11 15:08:34][INFO][main][org.eclipse.jetty.server.AbstractConnector:280]Started ServerConnector@38d5b107{HTTP/1.1,[http/1.1]}{0.0.0.0:7001}
+[][4684][2018-10-11 15:08:34][INFO][main][org.eclipse.jetty.server.Server:444]Started @4783ms
+[][4684][2018-10-11 15:08:34][INFO][main][org.eclipse.jetty.server.Server:444]Started @4783ms
+[system][4684][2018-10-11 15:08:34][WARN][main][com.cellsgame.game.Bootstrap:133]-->http server已启动
+[][4684][2018-10-11 15:08:34][WARN][main][com.cellsgame.game.Bootstrap:133]-->http server已启动
+[system][11458][2018-10-11 15:08:41][WARN][main][com.cellsgame.orm.dbimpl.JedisStrategy:102] redis.clients.jedis.exceptions.JedisException: Could not get a resource from the pool
+	at redis.clients.util.Pool.getResource(Pool.java:51) ~[jedis-2.9.0.jar:?]
+	at redis.clients.jedis.ShardedJedisPool.getResource(ShardedJedisPool.java:36) ~[jedis-2.9.0.jar:?]
+	at com.cellsgame.orm.dbimpl.JedisPool.getSharedJedis(JedisPool.java:53) ~[orm-0.0.3-20180823.065536-1.jar:?]
+	at com.cellsgame.orm.dbimpl.JedisStrategy.getMaxKey(JedisStrategy.java:57) ~[orm-0.0.3-20180823.065536-1.jar:?]
+	at com.cellsgame.orm.BaseDAO.getMaxKey(BaseDAO.java:166) ~[orm-0.0.3-20180823.065536-1.jar:?]
+	at com.cellsgame.game.cache.CachePlayerDBID.init(CachePlayerDBID.java:28) ~[classes/:?]
+	at com.cellsgame.game.Bootstrap.init(Bootstrap.java:181) ~[classes/:?]
+	at com.cellsgame.game.Bootstrap.main(Bootstrap.java:64) ~[classes/:?]
+Caused by: java.util.NoSuchElementException: Unable to validate object
+	at org.apache.commons.pool2.impl.GenericObjectPool.borrowObject(GenericObjectPool.java:506) ~[commons-pool2-2.4.2.jar:2.4.2]
+	at org.apache.commons.pool2.impl.GenericObjectPool.borrowObject(GenericObjectPool.java:363) ~[commons-pool2-2.4.2.jar:2.4.2]
+	at redis.clients.util.Pool.getResource(Pool.java:49) ~[jedis-2.9.0.jar:?]
+	... 7 more
+
+[][11458][2018-10-11 15:08:41][WARN][main][com.cellsgame.orm.dbimpl.JedisStrategy:102] redis.clients.jedis.exceptions.JedisException: Could not get a resource from the pool
+	at redis.clients.util.Pool.getResource(Pool.java:51) ~[jedis-2.9.0.jar:?]
+	at redis.clients.jedis.ShardedJedisPool.getResource(ShardedJedisPool.java:36) ~[jedis-2.9.0.jar:?]
+	at com.cellsgame.orm.dbimpl.JedisPool.getSharedJedis(JedisPool.java:53) ~[orm-0.0.3-20180823.065536-1.jar:?]
+	at com.cellsgame.orm.dbimpl.JedisStrategy.getMaxKey(JedisStrategy.java:57) ~[orm-0.0.3-20180823.065536-1.jar:?]
+	at com.cellsgame.orm.BaseDAO.getMaxKey(BaseDAO.java:166) ~[orm-0.0.3-20180823.065536-1.jar:?]
+	at com.cellsgame.game.cache.CachePlayerDBID.init(CachePlayerDBID.java:28) ~[classes/:?]
+	at com.cellsgame.game.Bootstrap.init(Bootstrap.java:181) ~[classes/:?]
+	at com.cellsgame.game.Bootstrap.main(Bootstrap.java:64) ~[classes/:?]
+Caused by: java.util.NoSuchElementException: Unable to validate object
+	at org.apache.commons.pool2.impl.GenericObjectPool.borrowObject(GenericObjectPool.java:506) ~[commons-pool2-2.4.2.jar:2.4.2]
+	at org.apache.commons.pool2.impl.GenericObjectPool.borrowObject(GenericObjectPool.java:363) ~[commons-pool2-2.4.2.jar:2.4.2]
+	at redis.clients.util.Pool.getResource(Pool.java:49) ~[jedis-2.9.0.jar:?]
+	... 7 more
+
+[system][13466][2018-10-11 15:08:43][WARN][main][com.cellsgame.orm.dbimpl.JedisStrategy:102] redis.clients.jedis.exceptions.JedisException: Could not get a resource from the pool
+	at redis.clients.util.Pool.getResource(Pool.java:51) ~[jedis-2.9.0.jar:?]
+	at redis.clients.jedis.ShardedJedisPool.getResource(ShardedJedisPool.java:36) ~[jedis-2.9.0.jar:?]
+	at com.cellsgame.orm.dbimpl.JedisPool.getSharedJedis(JedisPool.java:53) ~[orm-0.0.3-20180823.065536-1.jar:?]
+	at com.cellsgame.orm.dbimpl.JedisStrategy.getMaxKey(JedisStrategy.java:57) ~[orm-0.0.3-20180823.065536-1.jar:?]
+	at com.cellsgame.orm.BaseDAO.getMaxKey(BaseDAO.java:166) ~[orm-0.0.3-20180823.065536-1.jar:?]
+	at com.cellsgame.game.cache.CachePlayerDBID.init(CachePlayerDBID.java:28) ~[classes/:?]
+	at com.cellsgame.game.Bootstrap.init(Bootstrap.java:181) ~[classes/:?]
+	at com.cellsgame.game.Bootstrap.main(Bootstrap.java:64) ~[classes/:?]
+Caused by: java.util.NoSuchElementException: Unable to validate object
+	at org.apache.commons.pool2.impl.GenericObjectPool.borrowObject(GenericObjectPool.java:506) ~[commons-pool2-2.4.2.jar:2.4.2]
+	at org.apache.commons.pool2.impl.GenericObjectPool.borrowObject(GenericObjectPool.java:363) ~[commons-pool2-2.4.2.jar:2.4.2]
+	at redis.clients.util.Pool.getResource(Pool.java:49) ~[jedis-2.9.0.jar:?]
+	... 7 more
+
+[][13466][2018-10-11 15:08:43][WARN][main][com.cellsgame.orm.dbimpl.JedisStrategy:102] redis.clients.jedis.exceptions.JedisException: Could not get a resource from the pool
+	at redis.clients.util.Pool.getResource(Pool.java:51) ~[jedis-2.9.0.jar:?]
+	at redis.clients.jedis.ShardedJedisPool.getResource(ShardedJedisPool.java:36) ~[jedis-2.9.0.jar:?]
+	at com.cellsgame.orm.dbimpl.JedisPool.getSharedJedis(JedisPool.java:53) ~[orm-0.0.3-20180823.065536-1.jar:?]
+	at com.cellsgame.orm.dbimpl.JedisStrategy.getMaxKey(JedisStrategy.java:57) ~[orm-0.0.3-20180823.065536-1.jar:?]
+	at com.cellsgame.orm.BaseDAO.getMaxKey(BaseDAO.java:166) ~[orm-0.0.3-20180823.065536-1.jar:?]
+	at com.cellsgame.game.cache.CachePlayerDBID.init(CachePlayerDBID.java:28) ~[classes/:?]
+	at com.cellsgame.game.Bootstrap.init(Bootstrap.java:181) ~[classes/:?]
+	at com.cellsgame.game.Bootstrap.main(Bootstrap.java:64) ~[classes/:?]
+Caused by: java.util.NoSuchElementException: Unable to validate object
+	at org.apache.commons.pool2.impl.GenericObjectPool.borrowObject(GenericObjectPool.java:506) ~[commons-pool2-2.4.2.jar:2.4.2]
+	at org.apache.commons.pool2.impl.GenericObjectPool.borrowObject(GenericObjectPool.java:363) ~[commons-pool2-2.4.2.jar:2.4.2]
+	at redis.clients.util.Pool.getResource(Pool.java:49) ~[jedis-2.9.0.jar:?]
+	... 7 more
+
+[system][13627][2018-10-11 15:08:43][WARN][main][com.cellsgame.gateway.message.MessageHandler:26]message processor service not set, message will be processed in the connection io thread. 
+[system][13914][2018-10-11 15:08:43][WARN][main][io.netty.bootstrap.ServerBootstrap:146]Unknown channel option 'SO_KEEPALIVE' for channel '[id: 0xf6a4943b]'
+[system][13926][2018-10-11 15:08:43][WARN][main][io.netty.bootstrap.ServerBootstrap:146]Unknown channel option 'TCP_NODELAY' for channel '[id: 0xf6a4943b]'
+[system][13933][2018-10-11 15:08:43][WARN][main][com.cellsgame.game.Bootstrap:226]-->socket已启动
+[][13933][2018-10-11 15:08:43][WARN][main][com.cellsgame.game.Bootstrap:226]-->socket已启动
+[system][13962][2018-10-11 15:08:43][WARN][main][com.cellsgame.common.util.cmd.console.ReLoad:43]-->AgentLib not load Console CMD [reload] is invalidate
+[][13962][2018-10-11 15:08:43][WARN][main][com.cellsgame.common.util.cmd.console.ReLoad:43]-->AgentLib not load Console CMD [reload] is invalidate
+[system][15677][2018-10-11 15:08:45][WARN][pool-game_logic-1-thread-1][com.cellsgame.orm.dbimpl.JedisStrategy:438] redis.clients.jedis.exceptions.JedisException: Could not get a resource from the pool
+	at redis.clients.util.Pool.getResource(Pool.java:51) ~[jedis-2.9.0.jar:?]
+	at redis.clients.jedis.ShardedJedisPool.getResource(ShardedJedisPool.java:36) ~[jedis-2.9.0.jar:?]
+	at com.cellsgame.orm.dbimpl.JedisPool.getSharedJedis(JedisPool.java:53) ~[orm-0.0.3-20180823.065536-1.jar:?]
+	at com.cellsgame.orm.dbimpl.JedisStrategy.getAll(JedisStrategy.java:429) ~[orm-0.0.3-20180823.065536-1.jar:?]
+	at com.cellsgame.orm.BaseDAO.getAll(BaseDAO.java:426) ~[orm-0.0.3-20180823.065536-1.jar:?]
+	at com.cellsgame.game.module.sys.impl.SystemBOImpl.initOrLoadSysRec(SystemBOImpl.java:77) ~[classes/:?]
+	at com.cellsgame.game.module.sys.impl.SystemBOImpl.init(SystemBOImpl.java:39) ~[classes/:?]
+	at com.cellsgame.game.core.module.config.ModuleListener$1.onStartup(ModuleListener.java:35) ~[classes/:?]
+	at com.cellsgame.game.core.module.load.ModuleLoader.initModuleOnStartup(ModuleLoader.java:98) ~[classes/:?]
+	at com.cellsgame.game.Bootstrap.lambda$init$0(Bootstrap.java:202) ~[classes/:?]
+	at com.cellsgame.game.core.RunnableHandler.onEvent(RunnableHandler.java:17) ~[classes/:?]
+	at com.cellsgame.game.core.GameHandler.onEvent(GameHandler.java:22) ~[classes/:?]
+	at com.cellsgame.game.core.GameHandler.onEvent(GameHandler.java:15) ~[classes/:?]
+	at com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:129) ~[disruptor-3.3.6.jar:?]
+	at java.lang.Thread.run(Thread.java:748) [?:1.8.0_181]
+Caused by: java.util.NoSuchElementException: Unable to validate object
+	at org.apache.commons.pool2.impl.GenericObjectPool.borrowObject(GenericObjectPool.java:506) ~[commons-pool2-2.4.2.jar:2.4.2]
+	at org.apache.commons.pool2.impl.GenericObjectPool.borrowObject(GenericObjectPool.java:363) ~[commons-pool2-2.4.2.jar:2.4.2]
+	at redis.clients.util.Pool.getResource(Pool.java:49) ~[jedis-2.9.0.jar:?]
+	... 14 more
+
+[][15677][2018-10-11 15:08:45][WARN][pool-game_logic-1-thread-1][com.cellsgame.orm.dbimpl.JedisStrategy:438] redis.clients.jedis.exceptions.JedisException: Could not get a resource from the pool
+	at redis.clients.util.Pool.getResource(Pool.java:51) ~[jedis-2.9.0.jar:?]
+	at redis.clients.jedis.ShardedJedisPool.getResource(ShardedJedisPool.java:36) ~[jedis-2.9.0.jar:?]
+	at com.cellsgame.orm.dbimpl.JedisPool.getSharedJedis(JedisPool.java:53) ~[orm-0.0.3-20180823.065536-1.jar:?]
+	at com.cellsgame.orm.dbimpl.JedisStrategy.getAll(JedisStrategy.java:429) ~[orm-0.0.3-20180823.065536-1.jar:?]
+	at com.cellsgame.orm.BaseDAO.getAll(BaseDAO.java:426) ~[orm-0.0.3-20180823.065536-1.jar:?]
+	at com.cellsgame.game.module.sys.impl.SystemBOImpl.initOrLoadSysRec(SystemBOImpl.java:77) ~[classes/:?]
+	at com.cellsgame.game.module.sys.impl.SystemBOImpl.init(SystemBOImpl.java:39) ~[classes/:?]
+	at com.cellsgame.game.core.module.config.ModuleListener$1.onStartup(ModuleListener.java:35) ~[classes/:?]
+	at com.cellsgame.game.core.module.load.ModuleLoader.initModuleOnStartup(ModuleLoader.java:98) ~[classes/:?]
+	at com.cellsgame.game.Bootstrap.lambda$init$0(Bootstrap.java:202) ~[classes/:?]
+	at com.cellsgame.game.core.RunnableHandler.onEvent(RunnableHandler.java:17) ~[classes/:?]
+	at com.cellsgame.game.core.GameHandler.onEvent(GameHandler.java:22) ~[classes/:?]
+	at com.cellsgame.game.core.GameHandler.onEvent(GameHandler.java:15) ~[classes/:?]
+	at com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:129) ~[disruptor-3.3.6.jar:?]
+	at java.lang.Thread.run(Thread.java:748) [?:1.8.0_181]
+Caused by: java.util.NoSuchElementException: Unable to validate object
+	at org.apache.commons.pool2.impl.GenericObjectPool.borrowObject(GenericObjectPool.java:506) ~[commons-pool2-2.4.2.jar:2.4.2]
+	at org.apache.commons.pool2.impl.GenericObjectPool.borrowObject(GenericObjectPool.java:363) ~[commons-pool2-2.4.2.jar:2.4.2]
+	at redis.clients.util.Pool.getResource(Pool.java:49) ~[jedis-2.9.0.jar:?]
+	... 14 more
+

@@ -1,0 +1,180 @@
+package com.cellsgame;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.parser.Feature;
+import com.cellsgame.common.buffer.WriteBuffer;
+import com.cellsgame.common.util.GameUtil;
+import com.cellsgame.gateway.core.Connection;
+import com.cellsgame.gateway.core.Connector;
+import com.cellsgame.gateway.message.Message;
+import com.cellsgame.gateway.message.MessageHandler;
+import com.cellsgame.gateway.message.processor.JavaThreadMessageProcessor;
+import com.cellsgame.gateway.utils.Utils;
+import com.google.common.collect.Maps;
+import io.netty.buffer.ByteBuf;
+import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.socket.nio.NioSocketChannel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.net.InetSocketAddress;
+import java.nio.charset.Charset;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicInteger;
+/**
+ * Created by Yang on 16/6/16.
+ */
+public class GameClient {
+    private static final Logger LOGGER = LoggerFactory.getLogger(GameClient.class);
+    private static AtomicInteger i = new AtomicInteger(0);
+
+    private static void sendPlayerMessage(Connection connection,  int serverId) {
+        try {
+            WriteBuffer wbuf = WriteBuffer.allocate(8);
+
+            Map<String, Object> map = GameUtil.createSimpleMap();
+            map.put("c", Integer.toString(20003));
+
+            Map<String, Object> dataMap = GameUtil.createSimpleMap();
+            dataMap.put("playerName", "test01");
+            dataMap.put("img", Integer.valueOf(1));
+            dataMap.put("gender", Integer.valueOf(1));
+
+            map.put("d", dataMap);
+
+            wbuf.write_table(map);
+
+
+            byte[] data = wbuf.toByteArray();
+
+            ByteBuf buf = connection.newBuffer(14 + data.length)
+                    .writeIntLE(10+data.length)
+                    .writeBoolean(false)
+                    .writeBoolean(false)
+                    .writeIntLE(i.incrementAndGet())
+                    .writeIntLE(serverId)
+                    .writeBytes(data);
+
+
+            Message newMsg = new Message(buf);
+            connection.sendMessage(newMsg);
+
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+    private static void sendPlayerJsonMessage(Connection connection,  int serverId) {
+        try {
+//            WriteBuffer wbuf = WriteBuffer.allocate(8);
+//
+            Map<String, Object> map = GameUtil.createSimpleMap();
+            map.put("c", Integer.toString(20003));
+//
+            Map<String, Object> dataMap = GameUtil.createSimpleMap();
+            dataMap.put("playerName", "test01");
+            dataMap.put("img", Integer.valueOf(1));
+            dataMap.put("gender", Integer.valueOf(1));
+//
+            map.put("d", dataMap);
+
+
+            byte[] data = JSONObject.toJSONString(map).getBytes(Charset.forName("UTF-8"));
+
+            ByteBuf buf = connection.newBuffer(14 + data.length)
+                    .writeIntLE(10+data.length)
+                    .writeBoolean(false)
+                    .writeBoolean(false)
+                    .writeIntLE(i.incrementAndGet())
+                    .writeIntLE(serverId)
+                    .writeBytes(data);
+
+            byte[] bytes = new byte[14 + data.length];
+            buf.getBytes(0, bytes);
+            Message newMsg = new Message(buf);
+            connection.sendMessage(newMsg);
+
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
+        Map<String, InetSocketAddress> addressMap = Maps.newHashMap();
+        addressMap.put("a", new InetSocketAddress("192.168.10.115", 9999));
+
+        final Connector connector = new Connector("game client connector", addressMap);
+        connector.group(new NioEventLoopGroup(1)).channel(NioSocketChannel.class);
+        connector.setCodecFactory(new CMessageCodecFactory());
+        connector.setHandler(new MessageHandler(new JavaThreadMessageProcessor(Executors.newFixedThreadPool(1))) {
+            @Override
+            public void connectionOpened(Connection connection) {
+                LOGGER.debug("game connection open : {}", connection.getSessionId());
+                ByteBuf buf = connection.newBuffer(4 + 8);
+                buf.writeIntLE(8);
+                buf.writeCharSequence("20180828", Charset.forName("UTF-8"));
+                // handshake
+                connection.sendOriginalMessage(buf);
+            }
+
+            @Override
+            public void handshakeMessage(Connection connection, Object obj) {
+                LOGGER.debug("game connection handshake response : {}", obj);
+            }
+
+            @Override
+            public void connectionClosed(Connection connection) {
+                LOGGER.debug("game connection close : {}", connection.getSessionId());
+                connector.stop(null);
+            }
+
+            @Override
+            public void messageArrived(Connection connection, Message msg) {
+                LOGGER.debug("game message arrived : {}", connection.getSessionId());
+                byte[] bytes = new byte[msg.getDataLength() - 8];
+                msg.getContent().getBytes(8, bytes);
+
+                int lastClientMessageId = msg.getContent().readIntLE();
+                int lastServerMessageId = msg.getContent().readIntLE();
+
+//                if (i.intValue() == 1) {
+                if (lastClientMessageId > 1) {
+                    Map<?, ?> map = JSON.parseObject(bytes,  HashMap.class, Feature.OrderedField);
+                    LOGGER.debug("json msg", map);
+                }
+
+                sendPlayerJsonMessage(connection, lastServerMessageId);
+                try {
+                    Thread.sleep(30000);
+                } catch (InterruptedException e) {
+
+                }
+
+//                }
+            }
+
+            @Override
+            public void writeTimeout(Connection connection) {
+
+            }
+            /**
+             * 异常捕获
+             *
+             * @param connection 连接
+             * @param throwable  异常
+             */
+            public void exceptionCaught(Connection connection, Throwable throwable) {
+                LOGGER.debug("exception caught : ", throwable);
+                connection.close();
+            }
+        });
+
+        connector.start();
+    }
+
+}

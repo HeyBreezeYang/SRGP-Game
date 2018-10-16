@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+     http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+
+    <bean id="scheduler"
+          class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref local="dataQuartzCronTrigger"/>
+                <ref local="halfHourQuartzCronTrigger"/>
+                <ref local="minutesJobCronTrigger"/>
+                <ref local="secondsJobCronTrigger"/>
+                <ref local="dayOffset4JobCronTrigger"/>
+            </list>
+        </property>
+        <property name="autoStartup" value="false"/>
+    </bean>
+
+    <bean id="dataQuartzJob" class="com.cellsgame.game.quartz.DataQuartzJob"/>
+
+    <bean id="dataQuartzJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="dataQuartzJob"/>
+        <property name="targetMethod" value="execute"/>
+    </bean>
+
+    <bean id="dataQuartzCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="dataQuartzJobDetail"/>
+        <property name="cronExpression" value="* * * * * ?"/>
+    </bean>
+
+    <!--半小时执行一次-->
+    <bean id="halfHourQuartzJob" class="com.cellsgame.game.quartz.HalfHourJob">
+        <property name="guildBO" ref="guildBO"/>
+        <property name="storeBO" ref="storeBO" />
+    </bean>
+
+    <bean id="halfHourQuartzJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="halfHourQuartzJob"/>
+        <property name="targetMethod" value="execute"/>
+    </bean>
+
+    <bean id="halfHourQuartzCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="halfHourQuartzJobDetail"/>
+        <property name="cronExpression" value="0 0/30 * * * ? *"/>
+    </bean>
+
+    <!--每分钟执行-->
+    <bean name="minutesJob" class="com.cellsgame.game.quartz.MinutesJob">
+        <property name="depotBO" ref="depotBO"/>
+        <property name="systemBO" ref="systemBO"/>
+        <property name="activityBO" ref="activityBO" />
+    </bean>
+    <bean id="minutesJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="minutesJob"/>
+        <property name="targetMethod" value="execute"/>
+    </bean>
+    <bean id="minutesJobCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="minutesJobDetail"/>
+        <property name="cronExpression" value="0 * * * * ? *"/>
+    </bean>
+
+    <bean name="secondsJob" class="com.cellsgame.game.quartz.SecondsJob">
+    </bean>
+    
+    <bean id="secondsJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="secondsJob"/>
+        <property name="targetMethod" value="execute"/>
+    </bean>
+    <bean id="secondsJobCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="secondsJobDetail"/>
+        <property name="cronExpression" value="* * * * * ? *"/>
+    </bean>
+
+    <bean name="dayOffset4Job" class="com.cellsgame.game.quartz.DayOffset4Job">
+        <property name="playerBO" ref="playerBO"/>
+        <property name="guildBO" ref="guildBO"/>
+        <property name="friendsBO" ref="friendBO"/>
+    </bean>
+    <bean id="dayOffset4JobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="dayOffset4Job"/>
+        <property name="targetMethod" value="execute"/>
+    </bean>
+    <bean id="dayOffset4JobCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="dayOffset4JobDetail"/>
+        <property name="cronExpression" value="0 0 4 * * ?"/>
+    </bean>
+</beans>
+

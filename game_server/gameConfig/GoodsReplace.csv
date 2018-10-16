@@ -1,0 +1,1 @@
+"ID{id,int}","物品ID{goodsCid,int}","可代替物品{replaceGoodsCid,int}","需要数量{replaceGoodsNum,int}",

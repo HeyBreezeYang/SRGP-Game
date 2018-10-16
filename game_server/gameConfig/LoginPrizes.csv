@@ -1,0 +1,1 @@
+"配置ID(idx){id,int}","累计天数{days,int}(num,days)","发起者奖励{prizes,json_funcs}(json,prizes)",

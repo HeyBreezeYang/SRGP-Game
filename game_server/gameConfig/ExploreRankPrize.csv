@@ -1,0 +1,1 @@
+"ID{id,int}(idx)"	"排名类型{rankType,int}(num,rankType)"	"排名{rank,int}(num,rank)"	"成员奖励{prizes,json_funcs}(json,prizes)"	"会长奖励{leaderPrizes,json_funcs}(json,leaderPrizes)"

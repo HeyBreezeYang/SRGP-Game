@@ -1,0 +1,7 @@
+"ID{id,int}(idx)","职称(str,n)","突破等级{level,int}(num,level)","职称图片(str,p2)","对应员工等级上限(num,levelmax)","书籍等突破前上限(num,blmn)","书籍等突破后上限(num,blmx)","对应员工达成等级(num,levelmin)","消耗{cost,json_funcs}(json,cost)","突破书籍经验奖励{bookExpPrize,int}(num,bookExpPrize)",
+21600001,精英,1,000_1,150,50,100,100,"[{type:1,param:30021001,value:-1},{type:1,param:30022001,value:-1},{type:1,param:30023001,value:-1}]",200,
+21600002,骨干,2,000_2,200,100,150,150,"[{type:1,param:30021002,value:-1},{type:1,param:30022002,value:-1},{type:1,param:30023002,value:-1}]",400,
+21600003,组长,3,000_3,250,150,200,200,"[{type:1,param:30021003,value:-1},{type:1,param:30022003,value:-1},{type:1,param:30023003,value:-1}]",600,
+21600004,主管,4,000_4,300,200,250,250,"[{type:1,param:30021004,value:-1},{type:1,param:30022004,value:-1},{type:1,param:30023004,value:-1}]",1000,
+21600005,副经理,5,000_5,350,250,300,300,"[{type:1,param:30021005,value:-1},{type:1,param:30022005,value:-1},{type:1,param:30023005,value:-1}]",1800,
+21600006,经理,6,000_6,400,300,350,350,"[{type:1,param:30021006,value:-1},{type:1,param:30022006,value:-1},{type:1,param:30023006,value:-1}]",2600,

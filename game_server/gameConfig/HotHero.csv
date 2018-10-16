@@ -1,0 +1,1 @@
+"ID{id,int}(idx)","英雄{heroConfigId,int}","属性权重{properties,json_intmap}","属性下限{minValue,json_intmap}","属性上限{maxValue,json_intmap}",

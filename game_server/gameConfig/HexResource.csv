@@ -1,0 +1,5 @@
+"编号(idx){id,int}","怪物组ID{monsterTeam,int}(num,monsterTeam)","资源点等级(num,Lv)","资源点名称(str,nm)","资源点图标(str,p2)","产出类型{proType,int}(num,proType)","产出CID{proCid,int}(num,proCid)","最大产出量{maxTotalProNum,int}(num,momaxTotalProNum)","最长采集时间 秒{maxPrcTime,int}(num,maxPrcTime)","","",
+30600001,25000001,1,木材场,jianzhu2,80400006,,50000,600,,,
+30600002,25000001,2,木材场,jianzhu2,80400006,,60000,1200,,,
+30600003,25000001,3,采石场,jianzhu1,80400007,,60000,1800,,,
+30600004,25000001,4,采石场,jianzhu1,80400007,,60000,2400,,,

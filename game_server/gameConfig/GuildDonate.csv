@@ -1,0 +1,6 @@
+"ID{id,int}(idx)","描述(str,d)","消耗{cost,json_func}(json,cost)","奖励{prize,json_funcs}(json,prize)","公会经验奖励{guildExpPrize,int}(num,expPrz)","公会资金奖励{guildMoneyPrize,int}(num,mnyPrz)","文字表描述1",
+55200001,初级建设,"{type:4,param:80400002,value:-10}","[{type:4,param:80400005,value:10}]",10,10,155200001,
+55200002,中级建设,"{type:4,param:80400002,value:-50}","[{type:4,param:80400005,value:50}]",50,50,155200002,
+55200003,高级建设,"{type:4,param:80400002,value:-200}","[{type:4,param:80400005,value:200}]",200,200,155200003,
+55200004,道具建设,"{type:1,param:30030035,value:-1}","[{type:4,param:80400005,value:400}]",400,400,155200004,
+55200005,高级道具建设,"{type:1,param:30030036,value:-1}","[{type:4,param:80400005,value:1200}]",1200,1200,155200005,

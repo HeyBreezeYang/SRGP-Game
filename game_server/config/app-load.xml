@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+       http://www.springframework.org/schema/util
+       http://www.springframework.org/schema/util/spring-util-4.2.xsd
+       ">
+
+    <!-- 玩家数据加载链工厂对象 必须使用ApplicationContext带构造参数的方法getBean(String BeanName,Object
+        ... args)获取 -->
+    <bean id="loadPlayerJobFactory" scope="prototype" class="com.cellsgame.game.module.LoadPlayerJobFactory">
+        <property name="playerLoadJob" ref="loadPlayerChainJob"/>
+        <property name="playerDataLoadJob" ref="loadPlayerChainMap"/>
+        <property name="threadManager" ref="threadManager"/>
+    </bean>
+	<!-- 玩家数据加载链对象 -->
+    <util:map id="loadPlayerChainMap" scope="prototype">
+        <!--该map为 各种使用pid作为外键的数据加载链对象 与 pid外键IX的映射 -->
+        <entry key-ref="loadDepotChainJob" value="0"/>
+        <entry key-ref="loadShopChainJob" value="0"/>
+        <entry key-ref="loadShopItemRecordChainJob" value="0"/>
+        <entry key-ref="loadMailChainJob" value="0"/>
+        <entry key-ref="loadFixedDataChainJob" value="0"/>
+        <entry key-ref="loadFriendListChainJob" value="0"/>
+        <entry key-ref="loadRankVOJob" value="0"/>
+        <entry key-ref="loadCheckInVOJob" value="0"/>
+        <entry key-ref="loadActivityCondRecVOJob" value="0"/>
+        <entry key-ref="loadActivityBevRecVOJob" value="0"/>
+        <entry key-ref="loadCardVOJob" value="0"/>
+      	<entry key-ref="loadQuestProcVOJob" value="0"/>
+        <entry key-ref="loadQuestRecVOJob" value="0"/>
+        <entry key-ref="loadStatsVOJob" value="0"/>
+        <entry key-ref="loadRankLikeRecVOJob" value="0"/>
+        <entry key-ref="loadStoreItemRecordVOJob" value="0"/>
+    </util:map>
+    
+    <!-- 加载链工作器 -->
+
+	<bean id="loadRankLikeRecVOJob" scope="prototype" class="com.cellsgame.orm.LoadDBObjChainJob">
+        <property name="dao" ref="rankLikeRecDAO" />
+        <property name="dataSign">
+            <util:constant static-field="com.cellsgame.game.module.IBuildData.DATA_SIGN_RANK_LIKE_REC"/>
+        </property>
+    </bean>
+
+    <bean id="loadStoreItemRecordVOJob" scope="prototype" class="com.cellsgame.orm.LoadDBObjChainJob">
+        <property name="dao" ref="storeItemRecordDAO" />
+        <property name="dataSign">
+            <util:constant static-field="com.cellsgame.game.module.IBuildData.DATA_SIGN_STORE_ITEM_RECORD"/>
+        </property>
+    </bean>
+
+    <bean id="loadQuestProcVOJob" scope="prototype" class="com.cellsgame.orm.LoadDBObjChainJob">
+        <property name="dao" ref="questProcDAO"/>
+        <property name="dataSign">
+        	<util:constant static-field="com.cellsgame.game.module.IBuildData.DATA_SIGN_QUEST_PROC"/>
+        </property>
+    </bean>
+    
+	<bean id="loadQuestRecVOJob" scope="prototype" class="com.cellsgame.orm.LoadDBObjChainJob">
+        <property name="dao" ref="questRecDAO"/>
+        <property name="dataSign">
+            <util:constant static-field="com.cellsgame.game.module.IBuildData.DATA_SIGN_QUEST_REC"/>
+        </property>
+    </bean>
+
+
+	<bean id="loadStatsVOJob" scope="prototype" class="com.cellsgame.orm.LoadDBObjChainJob">
+		<property name="dao" ref="statsDAO" />
+		<property name="dataSign">
+			<util:constant static-field="com.cellsgame.game.module.IBuildData.DATA_SIGN_STATS" />
+		</property>
+	</bean>
+	
+    <bean id="loadCardVOJob" scope="prototype" class="com.cellsgame.orm.LoadDBObjChainJob">
+        <property name="dao" ref="cardDAO"/>
+        <property name="dataSign">
+            <util:constant static-field="com.cellsgame.game.module.IBuildData.DATA_SIGN_CARD"/>
+        </property>
+    </bean>
+
+    <bean id="loadOrderVOJob" scope="prototype" class="com.cellsgame.orm.LoadDBObjChainJob">
+        <property name="dao" ref="orderDAO"/>
+        <property name="dataSign">
+            <util:constant static-field="com.cellsgame.game.module.IBuildData.DATA_SIGN_ORDER"/>
+        </property>
+    </bean>
+    
+    <bean id="loadActivityCondRecVOJob" scope="prototype" class="com.cellsgame.orm.LoadDBObjChainJob">
+        <property name="dao" ref="activityCondRecDAO"/>
+        <property name="dataSign">
+            <util:constant static-field="com.cellsgame.game.module.IBuildData.DATA_SIGN_ACTIVITY_COND"/>
+        </property>
+    </bean>
+    
+    <bean id="loadActivityBevRecVOJob" scope="prototype" class="com.cellsgame.orm.LoadDBObjChainJob">
+        <property name="dao" ref="activityBevRecDAO"/>
+        <property name="dataSign">
+            <util:constant static-field="com.cellsgame.game.module.IBuildData.DATA_SIGN_ACTIVITY_BEV"/>
+        </property>
+    </bean>
+    
+    <bean id="loadCheckInVOJob" scope="prototype" class="com.cellsgame.orm.LoadDBObjChainJob">
+        <property name="dao" ref="checkInDAO"/>
+        <property name="dataSign">
+            <util:constant static-field="com.cellsgame.game.module.IBuildData.DATA_SIGN_CHECK_IN"/>
+        </property>
+    </bean>
+
+    <bean id="loadRankVOJob" scope="prototype" class="com.cellsgame.orm.LoadDBObjChainJob">
+        <property name="dao" ref="rankDAO"/>
+        <property name="dataSign">
+            <util:constant static-field="com.cellsgame.game.module.IBuildData.DATA_SIGN_Rank_VO"/>
+        </property>
+    </bean>
+    
+
+    <bean id="loadFriendListChainJob" scope="prototype" class="com.cellsgame.orm.LoadDBObjChainJob">
+        <property name="dao" ref="friendListDAO"/>
+        <property name="dataSign">
+            <util:constant static-field="com.cellsgame.game.module.IBuildData.DATA_SIGN_FRIEND_LIST"/>
+        </property>
+    </bean>
+
+    <bean id="loadMailChainJob" scope="prototype" class="com.cellsgame.orm.LoadDBObjChainJob">
+        <property name="dao" ref="mailDAO"/>
+        <property name="dataSign">
+            <util:constant static-field="com.cellsgame.game.module.IBuildData.DATA_SIGN_MAIL"/>
+        </property>
+    </bean>
+
+    <bean id="loadShopChainJob" scope="prototype" class="com.cellsgame.orm.LoadDBObjChainJob">
+        <property name="dao" ref="shopDAO"/>
+        <property name="dataSign">
+            <util:constant static-field="com.cellsgame.game.module.IBuildData.DATA_SIGN_SHOP"/>
+        </property>
+    </bean>
+    <bean id="loadShopItemRecordChainJob" scope="prototype" class="com.cellsgame.orm.LoadDBObjChainJob">
+        <property name="dao" ref="shopItemRecordDAO"/>
+        <property name="dataSign">
+            <util:constant static-field="com.cellsgame.game.module.IBuildData.DATA_SIGN_SHOP_ITEM_RECORD"/>
+        </property>
+    </bean>
+    <bean id="loadPlayerChainJob" scope="prototype" class="com.cellsgame.orm.LoadDBObjChainJob">
+        <property name="dao" ref="playerDAO"/>
+        <property name="dataSign">
+            <util:constant static-field="com.cellsgame.game.module.IBuildData.DATA_SIGN_PLAYER"/>
+        </property>
+    </bean>
+
+
+    <bean id="loadDepotChainJob" scope="prototype" class="com.cellsgame.orm.LoadDBObjChainJob">
+        <property name="dao" ref="depotDAO"/>
+        <property name="dataSign">
+            <util:constant static-field="com.cellsgame.game.module.IBuildData.DATA_SIGN_DEPOT"/>
+        </property>
+    </bean>
+
+    <bean id="loadFixedDataChainJob" scope="prototype" class="com.cellsgame.orm.LoadDBObjChainJob">
+        <property name="dao" ref="fixedDropDAO"/>
+        <property name="dataSign">
+            <util:constant static-field="com.cellsgame.game.module.IBuildData.DATA_SIGN_FIXED_DROP"/>
+        </property>
+    </bean>
+
+    <bean id="playerBuilder" class="com.cellsgame.game.module.BuildPlayerProcess">
+        <property name="builds">
+            <util:list value-type="com.cellsgame.game.module.IBuildData">
+                <ref bean="playerBO"/>
+                <ref bean="goodsBO"/>
+                <ref bean="depotBO"/>
+                <ref bean="shopBO"/>
+                <ref bean="shopItemRecordBO"/>
+                <ref bean="mailBO"/>
+                <ref bean="friendBO"/>
+                <ref bean="activityCondBuilder"/>
+                <ref bean="activityBevBuilder"/>
+                <ref bean="orderBO"/>
+                <ref bean="cardBO"/>
+                <ref bean="questBO"/>
+                <!-- society不需要跟随player加载,只参与build过程 -->
+                <ref bean="storeBO"/>
+                <ref bean="statsBO"/>
+                <!-- rankBO 加载时有特殊处理 必须置于加载链末端  -->
+                <ref bean="rankBO"/>
+
+                <ref bean="heroBO"/>
+            </util:list>
+        </property>
+    </bean>
+    
+    <bean id="activityCondBuilder" class="com.cellsgame.game.module.activity.ActivityCondBuilder">
+        <property name="activityBO" ref="activityBO" />
+    </bean>
+    <bean id="activityBevBuilder" class="com.cellsgame.game.module.activity.ActivityBevBuilder" >
+        <property name="activityBO" ref="activityBO" />
+    </bean>
+
+</beans>
